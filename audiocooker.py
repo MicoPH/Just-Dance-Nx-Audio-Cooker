@@ -251,7 +251,7 @@ def Menu():
             print("   Config Failed to read\n   Renew Config...")
         except:
             print('   Making Config...')
-        datjs = open('config1.json','w')
+        datjs = open('config.json','w')
         datjs.write('''{
     "addVolume": 1,
     "version": 1.3,
