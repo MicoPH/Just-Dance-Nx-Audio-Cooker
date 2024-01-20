@@ -1,8 +1,10 @@
 import os, struct, time, pathlib,json
 from datetime import datetime
 from tkinter import filedialog
+from tkinter import *
 from subprocess import DEVNULL, STDOUT, run, call
 def Menu():
+    os.system('cls')
     try:
         con =  json.load(open("config.json", "r"))
         volume = str(con["addVolume"])
@@ -27,7 +29,7 @@ def Menu():
     "addVolume": ''')
                 datjs.write(str(volume))
                 datjs.write(''',    
-    "version": 1.3,
+    "version": 1.4,
     "pcmMode": "''')
                 datjs.write(modepcm)
                 datjs.write('''",
@@ -254,7 +256,7 @@ def Menu():
         datjs = open('config.json','w')
         datjs.write('''{
     "addVolume": 1,
-    "version": 1.3,
+    "version": 1.4,
     "pcmMode": "normal",
     "opusMode": "normal",
     "channel": 2,
@@ -381,7 +383,7 @@ def Menu():
         ver = float(con["version"])
     except:
         conjson1()
-    if ver == 1.3:
+    if ver == 1.4:
         pass
     else:
         conjson1()
@@ -447,7 +449,7 @@ def Menu():
         print("   [Vorbis]: Invalid key. bitrate is set to 128000")
         bitratevorbistxt = "Vorbis Audio Bitrate:Medium"
         intbitratevorb = int(bitratevorbis/1000)
-    print('\n<------------------------------->\n\n\n Welcome to Just Dance Nx Audio Maker \n (Version 1.3)\n    Made by MicoPH  \n    If refresh. click Enter\n\n   Requirements:\n     FFMPEG - https://ffmpeg.org \n     VGMStream - Backup Audio (include in audiotools.zip)\n     VGAudio - for Nintendo Switch Opus (include in audiotools.zip)\n\n   PCM Mode: '+namepcmMode+" | Opus Mode: "+nameopusMode+"\n   "+txtchanneljson+" | "+txtvolumeset+"\n   "+bitrateopustxt+" | "+bitratevorbistxt+"\n\n     Choose the Options:\n     [1] Convert Audio to cooked nintendo opus file (commonly used in og games) (recommended for songs)\n     [2] Convert Audio to cooked pcm .wav format (recommended for amb and ui sfx)\n     [3] Convert Audio to Ogg\n     [4] Convert Back to WAV FILE(.wav.ckd to .wav)\n     [5] Help\n     [6] Changelog\n     [0] Exit\n\n")
+    print('\n Welcome to Just Dance Nx Audio Maker \n (Version 1.4.1)\n    Made by MicoPH  \n    If refresh. click Enter\n\n   Requirements:\n     FFMPEG - https://ffmpeg.org \n     VGMStream - Backup Audio (include in audiotools.zip)\n     VGAudio - for Nintendo Switch Opus (include in audiotools.zip)\n\n   PCM Mode: '+namepcmMode+" | Opus Mode: "+nameopusMode+"\n   "+txtchanneljson+" | "+txtvolumeset+"\n   "+bitrateopustxt+" | "+bitratevorbistxt+"\n\n     Choose the Options:\n     [1] Convert Audio to cooked nintendo opus file (Most recommended) (for songs only)\n     [2] Convert Audio to cooked pcm .wav format (this is only for amb, ui(sfx) and ui(pcm)\n     [3] Convert Audio to Ogg (optional feature)\n     [4] Convert Back to WAV FILE(.wav.ckd to .wav)\n     [5] Help\n     [6] Changelog\n     [0] Exit\n\n")
     try:
         option = str(input("   Choose the option -----> "))
     except:
@@ -464,6 +466,7 @@ def Menu():
             time.sleep(2)
             exit()
     def O1():
+        os.system('cls')
         def Opt1():
             def Raki():
                 if(os.path.isfile("temp/temp.lopus")):
@@ -524,44 +527,54 @@ def Menu():
                         except:
                             print('   [ERROR]: The file used from another process\n')
             try:
-                print("\n   Run Tkinter:\n   [NOTE]: If can't find filedialog. Minimize the window\n")
+                print("\n   Run Tkinter:\n")
+                openwindow = Tk()
+                openwindow.title('')
                 outputaudiofile = filedialog.askopenfilenames(initialdir=pathlib.Path, title='Select the audio file', filetypes=(("Audio files (*.wav,*.opus,*.mp3,*.ogg)","*.wav *.opus *.mp3 *.ogg"),("All files","*.*")))
+                openwindow.destroy()
                 if(not outputaudiofile):
-                        print("   [FAILED]: Tkinter Cancelled")
-                        time.sleep(1)
-                        BadContinue()
+                    print("   [FAILED]: Tkinter Cancelled")
+                    time.sleep(1)
+                    BadContinue()
+                print('   Input files:')
+                for lstinfo in outputaudiofile:
+                    print('     '+os.path.basename(lstinfo))
+                openwindow = Tk()
+                openwindow.title('')
                 output = filedialog.askdirectory(initialdir=pathlib.Path,title="Select Location")
+                openwindow.destroy()
+                print('   Directory: '+os.path.basename(output))
                 if(not output):
-                        print("   [FAILED]: Tkinter Cancelled")
-                        time.sleep(1)
-                        BadContinue()
+                    print("   [FAILED]: Tkinter Cancelled")
+                    time.sleep(1)
+                    BadContinue()
                 print('\n   Start Converting...\n')
                 for listfiles in outputaudiofile:
-                        listfiles1 = os.path.basename(listfiles)
-                        if(".ogg" in listfiles or ".opus" in listfiles or ".mp3" in listfiles or ".wav" in listfiles):
-                            # Other Audio process
+                    listfiles1 = os.path.basename(listfiles)
+                    if(".ogg" in listfiles or ".opus" in listfiles or ".mp3" in listfiles or ".wav" in listfiles):
+                        # Audio process
+                        try:
                             try:
-                                try:
-                                    os.mkdir('temp')
-                                except:
-                                    pass
-                                run((ffmpegPath), stdout=DEVNULL, stderr=STDOUT)
-                                print('   Running FFMPEG to: '+ listfiles1)
-                                os.system(ffmpegPath+' -y -i "'+listfiles+'" -f wav -bitexact -acodec pcm_s16le -ar 48000 -map_metadata -1 -ac '+str(channeljson)+' -loglevel quiet temp/temp.wav')
-                                try:
-                                    run(('VGAudioCli'), stdout=DEVNULL, stderr=STDOUT)
-                                    print('   Running VGAudio: '+ listfiles1)
-                                    call([vgaudioPath, 'temp/temp.wav', 'temp/temp.lopus', '--bitrate', str(bitrateopus), '--no-loop', '--opusheader','standard'],stdout=DEVNULL, stderr=STDOUT)
-                                except:
-                                    print("     [ERROR]: VGAudio (Nintendo opus) is not exist\n\n   1 missing")
-                                    time.sleep(1)
-                                    BadContinue()
+                                os.mkdir('temp')
                             except:
-                                print("   [ERROR]: FFMPEG is not exist\n\n   1 missing")
+                                pass
+                            run((ffmpegPath), stdout=DEVNULL, stderr=STDOUT)
+                            print('   Running FFMPEG to: '+ listfiles1)
+                            os.system(ffmpegPath+' -y -i "'+listfiles+'" -f wav -bitexact -acodec pcm_s16le -ar 48000 -map_metadata -1 -ac '+str(channeljson)+' -loglevel quiet temp/temp.wav')
+                            try:
+                                run(('VGAudioCli'), stdout=DEVNULL, stderr=STDOUT)
+                                print('   Running VGAudio: '+ listfiles1)
+                                call([vgaudioPath, 'temp/temp.wav', 'temp/temp.lopus', '--bitrate', str(bitrateopus), '--no-loop', '--opusheader','standard'],stdout=DEVNULL, stderr=STDOUT)
+                            except:
+                                print("     [ERROR]: VGAudio (Nintendo opus) is not exist\n\n   1 missing")
                                 time.sleep(1)
                                 BadContinue()
-                            audiofilename1 = os.path.splitext(listfiles1)[0]
-                            Raki()
+                        except:
+                            print("   [ERROR]: FFMPEG is not exist\n\n   1 missing")
+                            time.sleep(1)
+                            BadContinue()
+                        audiofilename1 = os.path.splitext(listfiles1)[0]
+                        Raki()
             except:
                 pass
         def Opt2():
@@ -625,18 +638,26 @@ def Menu():
                             print('   [ERROR]: The file used from another process\n')
                             time.sleep(1)
             try:
-                print("\n   Run Tkinter:\n   [NOTE]: If can't find filedialog. Minimize the window\n")
+                print("\n   Run Tkinter:\n")
+                openwindow = Tk()
+                openwindow.title('')
                 audiofilename = filedialog.askopenfilename(initialdir=pathlib.Path, title='Select the audio file', filetypes=(("Audio files (*.wav,*.opus,*.mp3,*.ogg)","*.wav *.opus *.mp3 *.ogg"),("All files","*.*")))
+                openwindow.destroy()
                 if(not audiofilename):
                     print("   [FAILED]: Tkinter Cancelled")
                     time.sleep(1)
                     BadContinue()
                 filenameinfo = os.path.basename(audiofilename)
+                print('   Input file: '+filenameinfo)
+                openwindow = Tk()
+                openwindow.title('')
                 output = filedialog.asksaveasfilename(filetypes=[("Ubisoft RAKI",'*.wav.ckd')],initialdir=pathlib.Path,title="Select Location",initialfile=os.path.splitext(filenameinfo)[0]+'.wav.ckd')
+                openwindow.destroy()
                 if(not output):
                     print("   [FAILED]: Tkinter Cancelled")
                     time.sleep(1)
                     BadContinue()
+                print('   Save file: '+os.path.basename(output))
                 print('\n   Start Converting...\n')
                 try:
                     os.mkdir('temp')
@@ -663,7 +684,7 @@ def Menu():
                 Raki()
             except:
                 pass
-        print('\n\n<------------------------------->\n\n   Encoding Type: Nintendo Opus\n     Header Type: '+nameopusMode+'\n   '+bitrateopustxt+'\n\n   What is your preferred option to convert?\n\n     [1] pick single file\n     [2] pick multiple files\n     [0] Back\n')
+        print('\n   Encoding Type: Nintendo Opus\n     Header Type: '+nameopusMode+'\n   '+bitrateopustxt+'\n\n   What is your preferred option to convert?\n\n     [1] pick single file\n     [2] pick multiple files\n     [0] Back\n')
         try:
             opt12 = int(input("   Choose the option -----> "))
         except:
@@ -676,6 +697,7 @@ def Menu():
         if(opt12 == 0):
             Menu()
         if(opt12 > 2 or opt12 < 0):
+            os.system('cls')
             print('      Invalid numbers')
             O1()
         Continue()
@@ -687,6 +709,7 @@ def Menu():
             time.sleep(1)
             Menu()
     def O2():
+        os.system('cls')
         def Opt1():
             def Raki():
                     if(os.path.isfile("temp/temp.wav")):
@@ -737,17 +760,27 @@ def Menu():
             except:
                 pass
             try:
-                print("\n   Run Tkinter:\n   [NOTE]: If can't find filedialog. Minimize the window\n")
+                print("\n   Run Tkinter:\n")
+                openwindow = Tk()
+                openwindow.title('')
                 outputaudiofile = filedialog.askopenfilenames(initialdir=pathlib.Path, title='Select the audio file', filetypes=(("Audio files (*.wav,*.opus,*.mp3,*.ogg)","*.wav *.opus *.mp3 *.ogg"),("All files","*.*")))
+                openwindow.destroy()
                 if(not outputaudiofile):
-                        print("   [FAILED]: Tkinter Cancelled")
-                        time.sleep(1)
-                        BadContinue()
+                    print("   [FAILED]: Tkinter Cancelled")
+                    time.sleep(1)
+                    BadContinue()
+                print('   Input files:')
+                for lstinfo in outputaudiofile:
+                    print('     '+os.path.basename(lstinfo))
+                openwindow = Tk()
+                openwindow.title('')
                 output = filedialog.askdirectory(initialdir=pathlib.Path,title="Select Location")
+                openwindow.destroy()
                 if(not output):
-                        print("   [FAILED]: Tkinter Cancelled")
-                        time.sleep(1)
-                        BadContinue()
+                    print("   [FAILED]: Tkinter Cancelled")
+                    time.sleep(1)
+                    BadContinue()
+                print('   Directory: '+os.path.basename(output))
                 print('\n   Start Converting...\n')
                 for listfiles in outputaudiofile:
                     listfiles1 = os.path.basename(listfiles)
@@ -819,18 +852,26 @@ def Menu():
             except:
                 pass
             try:
-                print("\n   Run Tkinter:\n   [NOTE]: If can't find filedialog. Minimize the window\n")
+                print("\n   Run Tkinter:\n")
+                openwindow = Tk()
+                openwindow.title('')
                 audiofilename = filedialog.askopenfilename(initialdir=pathlib.Path, title='Select the audio file', filetypes=(("Audio files (*.wav,*.opus,*.mp3,*.ogg)","*.wav *.opus *.mp3 *.ogg"),("All files","*.*")))
+                openwindow.destroy()
                 if(not audiofilename):
                     print("   [FAILED]: Tkinter Cancelled")
                     time.sleep(1)
                     BadContinue()
                 filenameinfo = os.path.basename(audiofilename)
+                print('   Input file: '+filenameinfo)
                 output = filedialog.asksaveasfilename(filetypes=[("Ubisoft RAKI",'*.wav.ckd')],initialdir=pathlib.Path,title="Select Location",initialfile=os.path.splitext(filenameinfo)[0]+'.wav.ckd')
+                openwindow.destroy()
+                openwindow = Tk()
+                openwindow.title('')
                 if(not output):
                     print("   [FAILED]: Tkinter Cancelled")
                     time.sleep(1)
                     BadContinue()
+                print('   Save file: '+os.path.basename(output))
                 print('\n   Start Converting...\n')
                 if(".ogg" in audiofilename or ".opus" in audiofilename or ".mp3" in audiofilename or ".wav" in audiofilename):
                         # Other Audio process
@@ -850,7 +891,7 @@ def Menu():
                         Raki()
             except Exception as e:
                 print('     No file found')
-        print('\n\n<------------------------------->\n\n   Encoding Type: RIFF WAVE (PCM)\n     Header Type: '+namepcmMode+'\n\n   What is your preferred option to convert?\n\n     [1] pick single file\n     [2] pick multiple files\n     [0] Back\n')
+        print('\n   Encoding Type: RIFF WAVE (PCM)\n     Header Type: '+namepcmMode+'\n\n   What is your preferred option to convert?\n\n     [1] pick single file\n     [2] pick multiple files\n     [0] Back\n')
         try:
             opt12 = int(input("   Choose the option -----> "))
         except:
@@ -870,23 +911,35 @@ def Menu():
         if getpcm == 1:
             O2()
         else:
+            os.system('cls')
             print('     Invalid Mode. reconfig the config.json')
             time.sleep(1)
             Menu()
     def O3():
+        os.system('cls')
         def Opt1():
             try:
-                print("\n   Run Tkinter:\n   [NOTE]: If can't find filedialog. Minimize the window\n")
+                print("\n   Run Tkinter:\n")
+                openwindow = Tk()
+                openwindow.title('')
                 outputaudiofile = filedialog.askopenfilenames(initialdir=pathlib.Path, title='Select the audio file', filetypes=(("Audio files (*.wav,*.opus,*.mp3,*.ogg)","*.wav *.opus *.mp3 *.ogg"),("All files","*.*")))
+                openwindow.destroy()
                 if(not outputaudiofile):
-                        print("   [FAILED]: Tkinter Cancelled")
-                        time.sleep(1)
-                        BadContinue()
+                    print("   [FAILED]: Tkinter Cancelled")
+                    time.sleep(1)
+                    BadContinue()
+                print('   Input files:')
+                for lstinfo in outputaudiofile:
+                    print('     '+os.path.basename(lstinfo))
+                openwindow = Tk()
+                openwindow.title('')
                 output = filedialog.askdirectory(initialdir=pathlib.Path,title="Select Location")
+                openwindow.destroy()
                 if(not output):
-                        print("   [FAILED]: Tkinter Cancelled")
-                        time.sleep(1)
-                        BadContinue()
+                    print("   [FAILED]: Tkinter Cancelled")
+                    time.sleep(1)
+                    BadContinue()
+                print('   Directory: '+os.path.basename(output))
                 print('\n   Start Converting...\n')
                 for listfiles in outputaudiofile:
                     listfiles1 = os.path.basename(listfiles)
@@ -906,21 +959,29 @@ def Menu():
                 time.sleep(1)
                 BadContinue()
         def Opt2():
-            print("\n   Run Tkinter:\n   [NOTE]: If can't find filedialog. Minimize the window\n")
+            print("\n   Run Tkinter:\n")
+            openwindow = Tk()
+            openwindow.title('')
             audiofilename = filedialog.askopenfilename(initialdir=pathlib.Path, title='Select the audio file', filetypes=(("Audio files (*.wav,*.opus,*.mp3,*.ogg)","*.wav *.opus *.mp3 *.ogg"),("All files","*.*")))
+            openwindow.destroy()
             if(not audiofilename):
                 print("   [FAILED]: Tkinter Cancelled")
                 time.sleep(1)
                 BadContinue()
             audiofilename1=os.path.basename(audiofilename)
+            print('   Input file: '+audiofilename1)
+            openwindow = Tk()
+            openwindow.title('')
             output = filedialog.asksaveasfilename(filetypes=[("Ogg Vorbis",'*.ogg')],initialdir=pathlib.Path,title="Select Location",initialfile=os.path.splitext(audiofilename1)[0]+".ogg")
+            openwindow.destroy()
+            print('   Save file: '+os.path.basename(output))
             if(not output):
                 print("   [FAILED]: Tkinter Cancelled")
                 time.sleep(1)
                 BadContinue()
             try:
                 print('\n   Start Converting...\n')
-                            # Other Audio process
+                # Other Audio process
                 try:
                     run((ffmpegPath), stdout=DEVNULL, stderr=STDOUT)
                     print('   Running FFMPEG to: '+ os.path.basename(audiofilename))
@@ -935,7 +996,8 @@ def Menu():
                 time.sleep(1)
                 BadContinue()
         def O3():
-            print('\n\n<------------------------------->\n\n   Convert Type: Ogg\n   '+bitratevorbistxt+'\n\n   What is your preferred option to convert?\n\n     [1] pick single file\n     [2] pick multiple files\n     [0] Back\n')
+            os.system('cls')
+            print('\n   Convert Type: Ogg\n   '+bitratevorbistxt+'\n\n   What is your preferred option to convert?\n\n     [1] pick single file\n     [2] pick multiple files\n     [0] Back\n')
             try:
                 opt12 = int(input("   Choose the option -----> "))
             except:
@@ -953,6 +1015,7 @@ def Menu():
         O3()
         Continue()
     if(intoption == 3):
+        os.system('cls')
         O3()
     if(intoption == 4):
         try:
@@ -960,7 +1023,8 @@ def Menu():
         except:
             pass
         def o6():
-            print("\n\n<------------------------------->\n\n      Choose to application to use to convert\n\n       [1] Use VGMStream (recommended) (requires vgmstream)\n\n       [2] Uncook PCM Data (vgmstream not required)\n           [WARN]: Don't recommended this options because didn't supported to other encoding like opus\n\n       [0] Exit\n")
+            os.system('cls')
+            print("\n      Choose to application to use to convert\n\n       [1] Use VGMStream (recommended) (requires vgmstream)\n\n       [2] Uncook PCM Data (vgmstream not required)\n           [WARN]: Don't recommended this options because didn't supported to other encoding like opus\n\n       [0] Exit\n")
             try:
                 optionforback = int(input('\n     Choose the options -----> '))
             except:
@@ -973,18 +1037,28 @@ def Menu():
                 Menu()
             if(optionforback == 1):
                 def Opt1():
-                    print("\n   Run Tkinter:\n   [NOTE]: If can't find filedialog. Minimize the window\n")
+                    print("\n   Run Tkinter:\n")
+                    openwindow = Tk()
+                    openwindow.title('')
                     outputaudiofile = filedialog.askopenfilenames(initialdir=pathlib.Path, title='Select the Ubisoft RAKI file', filetypes=(("Ubisoft RAKI",'*.wav.ckd'),("All files","*.*")))
+                    openwindow.destroy()
                     print('\n   Start Converting...\n')
                     if(not outputaudiofile):
                         print("   [FAILED]: Tkinter Cancelled")
                         time.sleep(1)
                         BadContinue()
+                    print('   Input files:')
+                    for lstinfo in outputaudiofile:
+                        print('     '+os.path.basename(lstinfo))
+                    openwindow = Tk()
+                    openwindow.title('')
                     output = filedialog.askdirectory(initialdir=pathlib.Path,title="Select Location")
+                    openwindow.destroy()
                     if(not output):
                         print("   [FAILED]: Tkinter Cancelled")
                         time.sleep(1)
                         BadContinue()
+                    print('   Directory: '+os.path.basename(output))
                     print('\n   Start Converting...\n')
                     for listfiles in outputaudiofile:
                         listfiles1 = os.path.basename(listfiles)
@@ -999,18 +1073,26 @@ def Menu():
                                 BadContinue()
                             print('   DONE: '+os.path.splitext(listfiles1)[0] +'\n')
                 def Opt2():
-                    print("\n   Run Tkinter:\n   [NOTE]: If can't find filedialog. Minimize the window\n")
+                    print("\n   Run Tkinter:\n")
+                    openwindow = Tk()
+                    openwindow.title('')
                     outputaudiofile = filedialog.askopenfilename(initialdir=pathlib.Path, title='Select the Ubisoft RAKI file', filetypes=(("Ubisoft RAKI",'*.wav.ckd'),("All files","*.*")))
+                    openwindow.destroy()
                     if(not outputaudiofile):
                         print("   [FAILED]: Tkinter Cancelled")
                         time.sleep(1)
                         BadContinue()
                     filenameinfo = os.path.basename(outputaudiofile)
+                    print('   Input file: '+filenameinfo)
+                    openwindow = Tk()
+                    openwindow.title('')
                     output = filedialog.asksaveasfilename(filetypes=[("Wave Format",'*.wav')],initialdir=pathlib.Path,title="Select Location",initialfile=os.path.splitext(filenameinfo)[0]+'.wav')
+                    openwindow.destroy()
                     if(not output):
                         print("   [FAILED]: Tkinter Cancelled")
                         time.sleep(1)
                         BadContinue()
+                    print('   Save file: '+os.path.basename(output))
                     print('\n   Start Converting...\n')
                     try:
                         run((vgmstreamPath), stdout=DEVNULL, stderr=STDOUT) # checks if you have vgmstream
@@ -1022,7 +1104,7 @@ def Menu():
                         BadContinue()
                     print('   DONE: '+os.path.splitext(output)[0] +'\n')
                 def O4():
-                    print('\n\n<------------------------------->\n\n   Uncook Type:VGMStream\n\n   What is your preferred option to convert?\n\n     [1] pick single file\n     [2] pick multiple files\n     [0] Back\n')
+                    print('\n   Uncook Type:VGMStream\n\n   What is your preferred option to convert?\n\n     [1] pick single file\n     [2] pick multiple files\n     [0] Back\n')
                     try:
                         opt12 = int(input("   Choose the option -----> "))
                     except:
@@ -1040,17 +1122,27 @@ def Menu():
                 O4()
             if(optionforback == 2):
                 def Opt1():
-                    print("\n   Run Tkinter:\n   [NOTE]: If can't find filedialog. Minimize the window\n")
+                    print("\n   Run Tkinter:\n")
+                    openwindow = Tk()
+                    openwindow.title('')
                     outputaudiofile = filedialog.askopenfilenames(initialdir=pathlib.Path, title='Select the audio file', filetypes=(("Ubisoft RAKI",'*.wav.ckd'),("All files","*.*")))
+                    openwindow.destroy()
                     if(not outputaudiofile):
                         print("   [FAILED]: Tkinter Cancelled")
                         time.sleep(1)
                         BadContinue()
+                    print('   Input files:')
+                    for lstinfo in outputaudiofile:
+                        print('     '+os.path.basename(lstinfo))
+                    openwindow = Tk()
+                    openwindow.title('')
                     output = filedialog.askdirectory(initialdir=pathlib.Path,title="Select Location")
+                    openwindow.destroy()
                     if(not output):
                         print("   [FAILED]: Tkinter Cancelled")
                         time.sleep(1)
                         BadContinue()
+                    print('   Directory: '+os.path.basename(output))
                     print('\n   Start Converting...\n')
                     for listfiles in outputaudiofile:
                         listfiles1 = os.path.basename(listfiles)
@@ -1103,17 +1195,25 @@ def Menu():
                         else:
                              print('   [ERROR]: This file '+ listfiles1+' is not .ckd')
                 def Opt2():
-                    print("\n   Run Tkinter:\n   [NOTE]: If can't find filedialog. Minimize the window\n")
+                    print("\n   Run Tkinter:\n")
+                    openwindow = Tk()
+                    openwindow.title('')
                     outputaudiofile = filedialog.askopenfilename(initialdir=pathlib.Path, title='Select the audio file', filetypes=(("Ubisoft RAKI",'*.wav.ckd'),("All files","*.*")))
+                    openwindow.destroy()
                     if(not outputaudiofile):
                         print("   [FAILED]: Tkinter Cancelled")
                         BadContinue()
                     filenameinfo = os.path.basename(outputaudiofile)
+                    print('   Input file: '+filenameinfo)
+                    openwindow = Tk()
+                    openwindow.title('')
                     output = filedialog.asksaveasfilename(filetypes=[("Wave Format",'*.wav')],initialdir=pathlib.Path,title="Select Location",initialfile=os.path.splitext(filenameinfo)[0]+'.wav')
+                    openwindow.destroy()
                     if(not output):
                         print("   [FAILED]: Tkinter Cancelled")
                         time.sleep(1)
                         BadContinue()
+                    print('   Save file: '+os.path.basename(output))
                     print('\n   Start Converting...\n')
                     with open(outputaudiofile, "rb") as f:
                                 print('\n   Uncook back to original audio file: '+ os.path.splitext(filenameinfo)[0])
@@ -1158,7 +1258,8 @@ def Menu():
                                 else:
                                     print('   BAD FILE: "'+outputaudiofile+ '" this is not pcm file')
                 def O5():
-                    print('\n\n<------------------------------->\n\n   Uncook Type:Decrypt Cook Wave PCM File (bulit-in)\n\n    What is your preferred option to convert?\n\n     [1] pick single file\n     [2] pick multiple files\n     [0] Back\n')
+                    os.system('cls')
+                    print('\n   Uncook Type:Decrypt Cook Wave PCM File (bulit-in)\n\n    What is your preferred option to convert?\n\n     [1] pick single file\n     [2] pick multiple files\n     [0] Back\n')
                     try:
                         opt12 = int(input("   Choose the option -----> "))
                     except:
@@ -1177,11 +1278,13 @@ def Menu():
         o6()
         Continue()
     if(intoption == 5):
-        print('\n\n<------------------------------->\n\n     Help:\n\n     Command 1/2/3 - Cook Wav to (wav.ckd or .ogg)\n       Requirements:\n          - Download and Install FFMPEG\n          - Requires VGAudio v.2.2.1 (include in audiotools.zip) - if you choose command 1 \n\n       How to use?:\n          Step 1: Make sure you have an audio file\n            Supported Formats: (*.wav,*.mp3,*.opus and *.ogg)\n          Step 2: Choose 1 or 2 or 3  and choose type of convert\n          Step 3: Waiting to encoding\n          Step 4: When done, your cooked audio was saved to your directory\n\n     Command 4 - Convert back using output file\n       Requirements:\n          - Install VGMSTREAM (include in audiotools.zip)\n\n\n       How to use?\n          Step 1: Make sure you have an cooked audio file (*.wav.ckd)\n          Step 2: Choose 4 and choose type of convert\n          Step 3: Waiting a few seconds to finish\n          Step 4: When done, your file was saved to your directory\n\n     How Audio Maker Works in Games:\n          PCM(wav) uses for ambs, ui sounds and ui music(pcm)\n          Nintendo(Libopus) uses for songs, ui music\n          Ogg uses for online music\n\n     How to config or change header on config.json?\n       1.Click config.json and choose your software to configure it(ex. Notepad):\n          Types of PCM to change header(pcmMode):\n            normal = Normal header in JD2020-2022\n            oldVersion = Old Header in JD2017-2019\n            titlepage = Just Dance TitlePage (with signature)\n\n          Types of cooked libopus to change header:\n            normal = Normal Header on JD2020-2022\n            oldVersion = Old Header on JD2017-2019\n     How to change bitrate:\n       Step 1: open config.json\n       Step 2: below on vgmstreamPath change value into bytes\n          (128000 = 128kb)\n\n       FAQ:\n          Q:Can i change the value in config.json?\n          A:Yes\n\n          Q:Is that supported from any platform?\n          A:maybe, for cooked pcm but opus didn'+"'"+'t supported for nx only\n\n          Q:is the format of nintendo opus the same as ffmpeg opus?\n          A:No, because the nintendo opus has a different structure\n\n          Q:What Nx means?\n          A:the codename on Nintendo Switch\n')
+        os.system('cls')
+        print('\n     Help:\n\n     Command 1/2/3 - Cook Wav to (wav.ckd or .ogg)\n       Requirements:\n          - Download and Install FFMPEG\n          - Requires VGAudio v.2.2.1 (include in audiotools.zip) - if you choose command 1 \n\n       How to use?:\n          Step 1: Make sure you have an audio file\n            Supported Formats: (*.wav,*.mp3,*.opus and *.ogg)\n          Step 2: Choose 1 or 2 or 3  and choose type of convert\n          Step 3: Waiting to encoding\n          Step 4: When done, your cooked audio was saved to your directory\n\n     Command 4 - Convert back using output file\n       Requirements:\n          - Install VGMSTREAM (include in audiotools.zip)\n\n\n       How to use?\n          Step 1: Make sure you have an cooked audio file (*.wav.ckd)\n          Step 2: Choose 4 and choose type of convert\n          Step 3: Waiting a few seconds to finish\n          Step 4: When done, your file was saved to your directory\n\n     How Audio Maker Works in Games:\n          PCM(wav) uses for ambs, ui sounds and ui music(pcm)\n          Nintendo(Libopus) uses for songs, ui music\n          Ogg uses for online music\n\n     How to config or change header on config.json?\n       1.Click config.json and choose your software to configure it(ex. Notepad):\n          Types of PCM to change header(pcmMode):\n            normal = Normal header in JD2020-2022\n            oldVersion = Old Header in JD2017-2019\n            titlepage = Just Dance TitlePage (with signature)\n\n          Types of cooked libopus to change header:\n            normal = Normal Header on JD2020-2022\n            oldVersion = Old Header on JD2017-2019\n     How to change bitrate:\n       Step 1: open config.json\n       Step 2: below on vgmstreamPath change value into bytes\n          (128000 = 128kb)\n\n       FAQ:\n          Q:Can i change the value in config.json?\n          A:Yes\n\n          Q:Is that supported from any platform?\n          A:maybe, for cooked pcm but opus didn'+"'"+'t supported for nx only\n\n          Q:is the format of nintendo opus the same as ffmpeg opus?\n          A:No, because the nintendo opus has a different structure\n\n          Q:What Nx means?\n          A:the codename on Nintendo Switch\n')
         time.sleep(1)
         BadContinue()
     if(intoption == 6):
-        print('\n\n<------------------------------->\n\n   Changelog:\n     Version 1.0\n       - New Launch\n       - Improvement CLI\n       - Added Features (back to wav conversion using output)\n       - Add feature "Decrypt Data" from command 4 it does not required vgmstream\n       - Add feature "Convert Audio using nintendo opus" from Command 1 which may better than ogg compression. [Command 1]\n       - Add optional feature "Convert Audio To Ogg". [Command 3]\n\n     Version 1.1\n       - Add Config to configure the code\n       - Add single file on Command 4\n       - Adding Brackets in per window\n       - Add More audio codes on config\n\n          Ubisoft RAKI PCM Type:\n            Normal - New Header/used for ambs/used for ui\n            Old Version - Old Types of Header/used ui in jd2017-2019\n            TitlePage - Main titlepage in Just Dance\n\n          Ubisoft RAKI Nintendo Opus Types:\n            Normal - New Header/used for ambs/used for ui\n            Old Version - Old Types of Header/used ui in jd2017-2019\n\n       - Fix issues from input directory on Commmand 2\n       - Fix issues from Command 3\n       - Fix crash on changelog when exit\n       - Updated ReadMe\n       - Update Command 5\n\n     Version 1.2\n       - Change input folder convert type into multiple file\n       - Fix file names from input to output file name\n       - remove input, output and outputback folder\n\n     Version 1.3\n       - The info of the config are shown in main menu\n       - Add bitrate key in config\n       - Fix bug update\n       - Fix crash detects not pcm from multiple files on "Uncook PCM Data"\n       - Add Refresh Function on Menu\n')
+        os.system('cls')
+        print('\n   Changelog:\n     Version 1.0\n       - [Feature] New Launch\n       - [Update Print] Improvement CLI\n       - [Feature] Added (back to wav conversion using output)\n       - [Feature] Add feature "Decrypt Data" from command 4 it does not required vgmstream\n       - [Feature] Add feature "Convert Audio using nintendo opus" from Command 1 which may better than ogg compression. [Command 1]\n       - [Optional Feature] Add "Convert Audio To Ogg". [Command 3]\n\n     Version 1.1\n       - [Feature] Add Config to configure the code\n       - [Feature] Add single file on Command 4\n       - [Feature] Adding Brackets in per window\n       - [Feature] Add More audio codes on config\n\n          Ubisoft RAKI PCM Type:\n            Normal - New Header/used for ambs/used for ui\n            Old Version - Old Types of Header/used ui in jd2017-2019\n            TitlePage - Main titlepage in Just Dance\n\n          Ubisoft RAKI Nintendo Opus Types:\n            Normal - New Header/used for ambs/used for ui\n            Old Version - Old Types of Header/used ui in jd2017-2019\n\n       - [Bug Fixed] Fix issues from input directory on Commmand 2\n       - [Bug fixed] Fix issues from Command 3\n       - [Bug Fixed] Fix crash on changelog when exit\n       - [Update ReadMe] Updated ReadMe\n       - [Change] Update Command 5\n\n     Version 1.2\n       - [Change] Change input folder convert type into multiple file\n       - [Bug Fixed] Fix file names from input to output file name\n       - [Removed Feature] remove input, output and outputback folder\n\n     Version 1.3\n       - [Update Info] The info of the config are shown in main menu\n       - [Feature] Add bitrate key in config\n       - [Bug Fixed] Fix bug update\n       - [Bug Fixed] Fix crash detects not pcm from multiple files on "Uncook PCM Data"\n       - [Feature] Add Refresh Function on Menu\n\n     Version 1.4.1 - The New Patch Version\n       - [Version Feature] New Patch Version\n          There was a patch version, if there is a bug again, it will be released again, it will not be in the minor version\n       - [Feature] Add input/output info\n       - [Bug fixed] Fix missing window in tkinter\n       - [Update Print] Update Print (it is no longer messy anymore)\n')
         time.sleep(1)
         BadContinue()
     if(intoption > 6 or intoption < 0):

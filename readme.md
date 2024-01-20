@@ -31,45 +31,52 @@ _A:the codename on Nintendo Switch_
 ## Changelog
 
 ### Version 1.0
-- New Launch
-- Improvement CLI
-- Added Features (back to wav conversion using output)
-- Add feature `Decrypt Data` from command 4 it does not required vgmstream
-- Add feature `Convert Audio using nintendo opus` from Command 1 which may better than ogg compression. _Command 1_
-- Add optional feature `Convert Audio To Ogg`. _Command 3_
+- <span style="color:#4ae75d">[Feature]</span> New Launch
+- <span style="color:#21dde2">[Update Print]</span> Improvement CLI
+- <span style="color:#4ae75d">[Feature]</span> Added (back to wav conversion using output)
+- <span style="color:#4ae75d">[Feature]</span> Add  `Decrypt Data` from _command 4_ it does not required vgmstream
+- <span style="color:#4ae75d">[Feature]</span> Add  `Convert Audio using nintendo opus` from _Command 1_ which may better than ogg compression. _Command 1_
+- <span style="color:#4ae7ab">[Optional Feature]</span> Add `Convert Audio To Ogg`. _Command 3_
 
 ### Version 1.1
-- Add Config to configure the code
-- Add single file on _Command 4_
-- Adding Brackets in per window
-- Add More audio codes on config
-    ### Ubisoft RAKI PCM Type:
-        Normal - New Header/used for ambs/used for ui
-        Old Version - Old Types of Header/used ui in jd2017-2019
-        TitlePage - Main titlepage in Just Dance
+- <span style="color:#4ae75d">[Feature]</span> Add Config to configure the code
+- <span style="color:#4ae75d">[Feature]</span> Add single file on _Command 4_
+- <span style="color:#4ae75d">[Feature]</span> Adding Brackets in per window
+- <span style="color:#4ae75d">[Feature]</span> Add More audio codes on config
 
-    ### Ubisoft RAKI Nintendo Opus Types:
-        Normal - New Header/used for ambs/used for ui
-        Old Version - Old Types of Header/used ui in jd2017-2019
+          Ubisoft RAKI PCM Type:
+            Normal - New Header/used for ambs/used for ui
+            Old Version - Old Types of Header/used ui in jd2017-2019
+            TitlePage - Main titlepage in Just Dance
 
-- Fix issues from input directory on Commmand 2
-- Fix issues from Command 3
-- Fix crash on changelog when exit
-- Updated ReadMe
-- Update Command 5
+          Ubisoft RAKI Nintendo Opus Types:
+            Normal - New Header/used for ambs/used for ui
+            Old Version - Old Types of Header/used ui in jd2017-2019>
+
+- <span style="color:#f1f11f">[Bug Fixed]</span> Fix issues from input directory on Commmand 2
+- <span style="color:#f1f11f">[Bug Fixed]</span> Fix issues from Command 3
+- <span style="color:#f1f11f">[Bug Fixed]</span> Fix crash on changelog when exit
+- <span style="color:#21dde2">[Update ReadMe]</span> Updated ReadMe
+- <span style="color:#3de4c3">[Change]</span> Update Command 5
 
 ### Version 1.2
-- Change input folder convert type into multiple file
-- Fix file names from input to output file name
-- remove input, output and outputback folder
+- <span style="color:#3de4c3">[Change]</span> Change  file picker convert type into multiple file
+- <span style="color:#f1f11f">[Bug Fixed]</span> Fix file names from input to output file name
+- <span style="color:#ed1b1c"> [Removed Feature]</span> remove input, output and outputback folder
 
 ### Version 1.3
-- The info of the config are shown in main menu
-- Add bitrate key in config
-- Fix bug update
-- Fix crash detects not pcm from multiple files on "Uncook PCM Data"
-- Add Refresh Function on Menu
+- <span style="color:#21dde2">[Update Info]</span> The info of the config are shown in main menu
+- <span style="color:#4ae75d">[Feature]</span> Add bitrate key in config
+- <span style="color:#f1f11f">[Bug Fixed]</span> Fix bug update
+- <span style="color:#f1f11f">[Bug Fixed]</span> Fix crash detects not pcm from multiple files on "Uncook PCM Data"
+- <span style="color:#4ae75d">[Feature]</span> Add Refresh Function on Menu
 
+### Version 1.4 
+- <span style="color:#c53add">[Version Feature]</span> New Patch Version
+   - There was a patch version, if there is a bug again, it will be released again, it will not be in the minor version
+- <span style="color:#4ae75d">[Feature]</span> Add folde/directory base path info 
+- <span style="color:#f1f11f">[Bug Fixed]</span> Fix missing window in tkinter
+- <span style="color:#21dde2">[Update Print]</span> Update Print (it is no longer messy anymore)
 ---
 ## Supported Formats
 - `.ogg` - Ogg Vorbis
@@ -101,10 +108,10 @@ _A:the codename on Nintendo Switch_
 ### How Audio Maker Works in Games:
 |Cook Format| Descrption|
 |:------|:-----|
-|pcm (.wav)|use for ambs, ui sounds and ui music(pcm)|
-|Nintendo _opus_|uses for songs, ui music|
+|pcm (.wav)|this is only for amb, ui(sfx) and ui(pcm)|
+|Nintendo _opus_|(Most recommended) (for songs only)|
 |Ogg|uses for online music|
 
 ----
 ## Infos
-`audiomaker` works in _Just Dance 2019_ to _Just Dance 2022_ (Nintendo Switch). I haven't tested if it will work in _Just Dance 2017_ and _Just Dance 2018_
+`audiocooker` works in _Just Dance 2019_ to _Just Dance 2022_ (Nintendo Switch). I haven't tested if it will work in _Just Dance 2017_ and _Just Dance 2018_
