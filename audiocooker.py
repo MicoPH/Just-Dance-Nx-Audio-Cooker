@@ -200,35 +200,35 @@ def Menu():
                     marklength = int(pcmitems["marklength"])
                     markbyte = b''
                     while marklength > 0:
-                                        markname = "mark"+str(marklength)
-                                        markbyte = struct.pack("I",int(pcmitems["markdata"][0][markname]))+markbyte
-                                        markcount+=1
-                                        addinfo = markcount
-                                        infomultplier = pcmitems["markdata"][0]["multiplier"][0]["addinfo"+str(addinfo)]
-                                        if pcmitems["markdata"][0]["multiplieronaddinfo"+str(addinfo)]:
-                                            multplytodatapcm = int((pcmitems["markdata"][0][infomultplier]-addinfo)/4)
-                                            byteaddinfomutiply = struct.pack("I",int(pcmitems["markdata"][0]["addinfohead"+str(addinfo)]))
-                                            byteaddinfo = byteaddinfo+(byteaddinfomutiply*multplytodatapcm)
-                                        else:
-                                            byteaddinfo = byteaddinfo+struct.pack("I",int(pcmitems["markdata"][0]["addinfohead"+str(addinfo)]))
-                                        marklength = marklength - 1
+                        markname = "mark"+str(marklength)
+                        markbyte = struct.pack("I",int(pcmitems["markdata"][0][markname]))+markbyte
+                        markcount+=1
+                        addinfo = markcount
+                        infomultplier = pcmitems["markdata"][0]["multiplier"][0]["addinfo"+str(addinfo)]
+                        if pcmitems["markdata"][0]["multiplieronaddinfo"+str(addinfo)]:
+                            multplytodatapcm = int((pcmitems["markdata"][0][infomultplier]-addinfo)/4)
+                            byteaddinfomutiply = struct.pack("I",int(pcmitems["markdata"][0]["addinfohead"+str(addinfo)]))
+                            byteaddinfo = byteaddinfo+(byteaddinfomutiply*multplytodatapcm)
+                        else:
+                            byteaddinfo = byteaddinfo+struct.pack("I",int(pcmitems["markdata"][0]["addinfohead"+str(addinfo)]))
+                        marklength = marklength - 1
                 if pcmitems["strg"]:
-                                        strgtitle = b'STRG'
-                                        strglength = int(pcmitems["strglength"])
-                                        strgbyte = b''
-                                        while strglength > 0:
-                                            strgname = "strg"+str(strglength)
-                                            strgcount+=1
-                                            strgbyte = struct.pack("I",int(pcmitems["markdata"][0][strgname]))+strgbyte
-                                            addinfo = markcount+strgcount
-                                            infomultplier = pcmitems["markdata"][0]["multiplier"][0]["addinfo"+str(addinfo)]
-                                            if pcmitems["markdata"][0]["multiplieronaddinfo"+str(addinfo)]:
-                                                multplytodatapcm = int((pcmitems["markdata"][0][infomultplier]-strgcount)/4)
-                                                byteaddinfomutiply = struct.pack("I",int(pcmitems["markdata"][0]["addinfohead"+str(addinfo)]))*multplytodatapcm
-                                                byteaddinfo = byteaddinfo+byteaddinfomutiply
-                                            else:
-                                                byteaddinfo = byteaddinfo+struct.pack("I",int(pcmitems["markdata"][0]["addinfohead"+str(addinfo)]))
-                                            strglength = strglength - 1
+                    strgtitle = b'STRG'
+                    strglength = int(pcmitems["strglength"])
+                    strgbyte = b''
+                    while strglength > 0:
+                        strgname = "strg"+str(strglength)
+                        strgcount+=1
+                        strgbyte = struct.pack("I",int(pcmitems["markdata"][0][strgname]))+strgbyte
+                        addinfo = markcount+strgcount
+                        infomultplier = pcmitems["markdata"][0]["multiplier"][0]["addinfo"+str(addinfo)]
+                        if pcmitems["markdata"][0]["multiplieronaddinfo"+str(addinfo)]:
+                            multplytodatapcm = int((pcmitems["markdata"][0][infomultplier]-strgcount)/4)
+                            byteaddinfomutiply = struct.pack("I",int(pcmitems["markdata"][0]["addinfohead"+str(addinfo)]))*multplytodatapcm
+                            byteaddinfo = byteaddinfo+byteaddinfomutiply
+                        else:
+                            byteaddinfo = byteaddinfo+struct.pack("I",int(pcmitems["markdata"][0]["addinfohead"+str(addinfo)]))
+                        strglength = strglength - 1
                 addinfobyte = byteaddinfo
                 getpcm = 1
         for nopusitems in con["opusModeData"]:
@@ -449,7 +449,7 @@ def Menu():
         print("   [Vorbis]: Invalid key. bitrate is set to 128000")
         bitratevorbistxt = "Vorbis Audio Bitrate:Medium"
         intbitratevorb = int(bitratevorbis/1000)
-    print('\n Welcome to Just Dance Nx Audio Maker \n (Version 1.4.1)\n    Made by MicoPH  \n    If refresh. click Enter\n\n   Requirements:\n     FFMPEG - https://ffmpeg.org \n     VGMStream - Backup Audio (include in audiotools.zip)\n     VGAudio - for Nintendo Switch Opus (include in audiotools.zip)\n\n   PCM Mode: '+namepcmMode+" | Opus Mode: "+nameopusMode+"\n   "+txtchanneljson+" | "+txtvolumeset+"\n   "+bitrateopustxt+" | "+bitratevorbistxt+"\n\n     Choose the Options:\n     [1] Convert Audio to cooked nintendo opus file (Most recommended) (for songs only)\n     [2] Convert Audio to cooked pcm .wav format (this is only for amb, ui(sfx) and ui(pcm)\n     [3] Convert Audio to Ogg (optional feature)\n     [4] Convert Back to WAV FILE(.wav.ckd to .wav)\n     [5] Help\n     [6] Changelog\n     [0] Exit\n\n")
+    print('\n Welcome to Just Dance Nx Audio Maker \n (Version 1.4.2)\n    Made by MicoPH  \n    If refresh. click Enter\n\n   Requirements:\n     FFMPEG - https://ffmpeg.org \n     VGMStream - Backup Audio (include in audiotools.zip)\n     VGAudio - for Nintendo Switch Opus (include in audiotools.zip)\n\n   PCM Mode: '+namepcmMode+" | Opus Mode: "+nameopusMode+"\n   "+txtchanneljson+" | "+txtvolumeset+"\n   "+bitrateopustxt+" | "+bitratevorbistxt+"\n\n     Choose the Options:\n     [1] Convert Audio to cooked nintendo opus file (Most recommended) (for songs only)\n     [2] Convert Audio to cooked pcm .wav format (this is only for amb, ui(sfx) and ui(pcm)\n     [3] Convert Audio to Ogg (optional feature)\n     [4] Convert Back to WAV FILE(.wav.ckd to .wav)\n     [5] Help\n     [6] Changelog\n     [0] Exit\n\n")
     try:
         option = str(input("   Choose the option -----> "))
     except:
@@ -468,19 +468,19 @@ def Menu():
     def O1():
         os.system('cls')
         def Opt1():
-            def Raki():
+            def Raki(audiofilename1,listfiles1,listfiles):
                 if(os.path.isfile("temp/temp.lopus")):
                     print('   Encoding: '+ listfiles1)
                     opussize = os.path.getsize("temp/temp.lopus") 
                     with open("temp/temp.wav", "rb") as b:
-                                b.read(12)
-                                formattitle = b.read(4)
-                                bitbyte = struct.unpack("I", b.read(4))[0] # if bytes is 16 means little bitbyte 
-                                b.read(2)
-                                channel = struct.unpack("H",b.read(2))[0]
-                                riffdatainfo = b.read(12)
-                                datatitle = b.read(4)
-                                minidata = struct.unpack("I", b.read(4))[0]
+                        b.read(12)
+                        formattitle = b.read(4)
+                        bitbyte = struct.unpack("I", b.read(4))[0] # if bytes is 16 means little bitbyte 
+                        b.read(2)
+                        channel = struct.unpack("H",b.read(2))[0]
+                        riffdatainfo = b.read(12)
+                        datatitle = b.read(4)
+                        minidata = struct.unpack("I", b.read(4))[0]
                     with open("temp/temp.lopus", "rb") as f:
                         o1=f.read(8)
                         f.read(4)
@@ -523,7 +523,33 @@ def Menu():
                             f.close
                             opusenc.close
                             outputres = output.replace('/','\\')+"\\"
-                            print('   DONE: '+ outputres + os.path.splitext(listfiles1)[0] + ".wav.ckd "+' \n')
+                            filepathsize=os.path.getsize(listfiles)
+                            if filepathsize<1000000:
+                                filepathsizefloat = filepathsize/1024
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                bfrfilepathtxt = str(filepathsizefloatdec)+" KB"
+                            elif filepathsize<1000000000:
+                                filepathsizefloat = filepathsize/1024000
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                bfrfilepathtxt = str(filepathsizefloatdec)+" MB"
+                            else:
+                                filepathsizefloat = filepathsize/1024000000
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                bfrfilepathtxt = str(filepathsizefloatdec)+" GB"
+                            filepathsize=os.path.getsize(output+"\\" + audiofilename1 + ".wav.ckd")
+                            if filepathsize<1000000:
+                                filepathsizefloat = filepathsize/1024
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                filepathtxt = str(filepathsizefloatdec)+" KB"
+                            elif filepathsize<1000000000:
+                                filepathsizefloat = filepathsize/1024000
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                filepathtxt = str(filepathsizefloatdec)+" MB"
+                            else:
+                                filepathsizefloat = filepathsize/1024000000
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                filepathtxt = str(filepathsizefloatdec)+" GB"
+                            print('   DONE: '+ outputres + os.path.splitext(listfiles1)[0] + ".wav.ckd "+' \n     Size:'+bfrfilepathtxt+' --> '+filepathtxt+'\n')
                         except:
                             print('   [ERROR]: The file used from another process\n')
             try:
@@ -550,31 +576,40 @@ def Menu():
                     BadContinue()
                 print('\n   Start Converting...\n')
                 for listfiles in outputaudiofile:
-                    listfiles1 = os.path.basename(listfiles)
-                    if(".ogg" in listfiles or ".opus" in listfiles or ".mp3" in listfiles or ".wav" in listfiles):
-                        # Audio process
-                        try:
+                    def startRun():
+                        listfiles1 = os.path.basename(listfiles)
+                        if(".ogg" in listfiles or ".opus" in listfiles or ".mp3" in listfiles or ".wav" in listfiles):
+                            # Audio process
                             try:
-                                os.mkdir('temp')
+                                try:
+                                    os.mkdir('temp')
+                                except:
+                                    pass
+                                run((ffmpegPath), stdout=DEVNULL, stderr=STDOUT)
+                                print('   Running FFMPEG to: '+ listfiles1)
+                                os.system(ffmpegPath+' -y -i "'+listfiles+'" -f wav -bitexact -acodec pcm_s16le -ar 48000 -map_metadata -1 -ac '+str(channeljson)+' -loglevel quiet temp/temp.wav')
+                                try:
+                                    run(('VGAudioCli'), stdout=DEVNULL, stderr=STDOUT)
+                                    print('   Running VGAudio: '+ listfiles1)
+                                    call([vgaudioPath, 'temp/temp.wav', 'temp/temp.lopus', '--bitrate', str(bitrateopus), '--no-loop', '--opusheader','standard'],stdout=DEVNULL, stderr=STDOUT)
+                                except:
+                                    print("     [ERROR]: VGAudio (Nintendo opus) is not exist\n")
+                                    time.sleep(1)
+                                    BadContinue()
                             except:
-                                pass
-                            run((ffmpegPath), stdout=DEVNULL, stderr=STDOUT)
-                            print('   Running FFMPEG to: '+ listfiles1)
-                            os.system(ffmpegPath+' -y -i "'+listfiles+'" -f wav -bitexact -acodec pcm_s16le -ar 48000 -map_metadata -1 -ac '+str(channeljson)+' -loglevel quiet temp/temp.wav')
-                            try:
-                                run(('VGAudioCli'), stdout=DEVNULL, stderr=STDOUT)
-                                print('   Running VGAudio: '+ listfiles1)
-                                call([vgaudioPath, 'temp/temp.wav', 'temp/temp.lopus', '--bitrate', str(bitrateopus), '--no-loop', '--opusheader','standard'],stdout=DEVNULL, stderr=STDOUT)
-                            except:
-                                print("     [ERROR]: VGAudio (Nintendo opus) is not exist\n\n   1 missing")
+                                print("   [ERROR]: FFMPEG is not exist\n")
                                 time.sleep(1)
                                 BadContinue()
-                        except:
-                            print("   [ERROR]: FFMPEG is not exist\n\n   1 missing")
-                            time.sleep(1)
-                            BadContinue()
-                        audiofilename1 = os.path.splitext(listfiles1)[0]
-                        Raki()
+                            Raki(os.path.splitext(listfiles1)[0],listfiles1,listfiles)
+                    if(os.path.isfile(output+"/"+os.path.splitext(os.path.basename(listfiles))[0]+".wav.ckd")):
+                        print('   File: "'+os.path.basename(listfiles)+'"')
+                        overwritteninput = str(input("   Are you sure that file will be overwritten (y or n)? "))
+                        if overwritteninput=="y" or overwritteninput=="Y":
+                            startRun()
+                        else:
+                            print('   The file: "'+os.path.basename(listfiles)+'" was canceled')
+                    else:
+                        startRun()
             except:
                 pass
         def Opt2():
@@ -583,14 +618,14 @@ def Menu():
                     print('   Encoding: '+ filenameinfo)
                     opussize = os.path.getsize("temp/temp.lopus") 
                     with open("temp/temp.wav", "rb") as b:
-                                b.read(12)
-                                formattitle = b.read(4)
-                                bitbyte = struct.unpack("I", b.read(4))[0] # if bytes is 16 means little bitbyte 
-                                b.read(2)
-                                channel = struct.unpack("H",b.read(2))[0]
-                                riffdatainfo = b.read(12)
-                                datatitle = b.read(4)
-                                minidata = struct.unpack("I", b.read(4))[0]
+                        b.read(12)
+                        formattitle = b.read(4)
+                        bitbyte = struct.unpack("I", b.read(4))[0] # bytes is 16  
+                        b.read(2)
+                        channel = struct.unpack("H",b.read(2))[0]
+                        riffdatainfo = b.read(12)
+                        datatitle = b.read(4)
+                        minidata = struct.unpack("I", b.read(4))[0]
                     with open("temp/temp.lopus", "rb") as f:
                         o1=f.read(8)
                         f.read(4)
@@ -632,7 +667,34 @@ def Menu():
                             b.close
                             f.close
                             opusenc.close
-                            print('   DONE: '+output.replace('/','\\') +'\n')
+                            outputres = output.replace('/','\\')
+                            filepathsize=os.path.getsize(audiofilename)
+                            if filepathsize<1000000:
+                                filepathsizefloat = filepathsize/1024
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                bfrfilepathtxt = str(filepathsizefloatdec)+" KB"
+                            elif filepathsize<1000000000:
+                                filepathsizefloat = filepathsize/1024000
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                bfrfilepathtxt = str(filepathsizefloatdec)+" MB"
+                            else:
+                                filepathsizefloat = filepathsize/1024000000
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                bfrfilepathtxt = str(filepathsizefloatdec)+" GB"
+                            filepathsize=os.path.getsize(outputres)
+                            if filepathsize<1000000:
+                                filepathsizefloat = filepathsize/1024
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                filepathtxt = str(filepathsizefloatdec)+" KB"
+                            elif filepathsize<1000000000:
+                                filepathsizefloat = filepathsize/1024000
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                filepathtxt = str(filepathsizefloatdec)+" MB"
+                            else:
+                                filepathsizefloat = filepathsize/1024000000
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                filepathtxt = str(filepathsizefloatdec)+" GB"
+                            print('   DONE: '+ outputres +' \n     Size:'+bfrfilepathtxt+' --> '+filepathtxt+'\n')
                             time.sleep(1)
                         except Exception as e:
                             print('   [ERROR]: The file used from another process\n')
@@ -673,14 +735,13 @@ def Menu():
                         print('   Running VGAudio: '+filenameinfo)
                         call([vgaudioPath, 'temp/temp.wav', 'temp/temp.lopus', '--bitrate', str(bitrateopus), '--no-loop', '--opusheader','standard'],stdout=DEVNULL, stderr=STDOUT)
                     except:
-                        print("     [ERROR]: VGAudio (Nintendo opus) is not exist\n\n   1 missing")
+                        print("     [ERROR]: VGAudio (Nintendo opus) is not exist\n")
                         time.sleep(1)
                         BadContinue()
                 except Exception as e:
                     print("   [ERROR]: FFMPEG is not exist\n")
                     time.sleep(1)
                     BadContinue()
-                audiofilename1 = os.path.splitext(output)[0]
                 Raki()
             except:
                 pass
@@ -711,50 +772,77 @@ def Menu():
     def O2():
         os.system('cls')
         def Opt1():
-            def Raki():
-                    if(os.path.isfile("temp/temp.wav")):
-                        print('   Encoding: '+ audiofilename1)
-                        # open data from temp file
-                        with open("temp/temp.wav", "rb") as f:
-                            f.read(12)
-                            formattitle = f.read(4)
-                            bitbyte = f.read(4)
-                            audioformat = f.read(2)
-                            numofchannels = struct.unpack('h',f.read(2))[0]
-                            riffend = f.read(12)
-                            datatitle = f.read(4)
-                            data = f.read(4)
-                            audiofile = f.read()
-                            #Checking when process
-                            try:
-                                denc = open(output+"\\" + audiofilename1 + ".wav.ckd", "wb")
-                                denc.write(b'RAKI') # main header of this game
-                                denc.write(struct.pack('I',11))
-                                denc.write(b'Nx  pcm ')
-                                denc.write(struct.pack('I',pcmhead1))
-                                denc.write(struct.pack('I',pcmhead2))
-                                denc.write(struct.pack('I',pcmhead3))
-                                denc.write(struct.pack('I',pcmhead4))
-                                denc.write(formattitle)
-                                denc.write(struct.pack('I',pcmfmt))
-                                denc.write(struct.pack('I',pcmfmt2))
-                                denc.write(marktitle)
-                                denc.write(markbyte)
-                                denc.write(strgtitle)
-                                denc.write(strgbyte)
-                                denc.write(datatitle)
-                                denc.write(struct.pack('I',pcmhead2))
-                                denc.write(data) # important data chunk size from original audio # end header of audio file
-                                denc.write(audioformat)
-                                denc.write(struct.pack('h',numofchannels))
-                                denc.write(riffend) # samplerate, byterate,blockAlign,bitspersample
-                                denc.write(addinfobyte)
-                                denc.write(audiofile) # whole data from original audio 
-                                f.close
-                                denc.close
-                                print("   DONE: "+ output.replace('/','\\')+"\\" + audiofilename1 + ".wav.ckd")
-                            except Exception as e:
-                                print('   [ERROR]: The file used from another process\n')
+            def Raki(audiofilename1, listfiles):
+                if(os.path.isfile("temp/temp.wav")):
+                    print('   Encoding: '+ audiofilename1)
+                    # open data from temp file
+                    with open("temp/temp.wav", "rb") as f:
+                        f.read(12)
+                        formattitle = f.read(4)
+                        f.read(4)
+                        audioformat = f.read(2)
+                        numofchannels = struct.unpack('h',f.read(2))[0]
+                        riffend = f.read(12)
+                        datatitle = f.read(4)
+                        data = f.read(4)
+                        audiofile = f.read()
+                        #Checking when process
+                        try:
+                            denc = open(output+"\\" + audiofilename1 + ".wav.ckd", "wb")
+                            denc.write(b'RAKI') # main header of this game
+                            denc.write(struct.pack('I',11))
+                            denc.write(b'Nx  pcm ')
+                            denc.write(struct.pack('I',pcmhead1))
+                            denc.write(struct.pack('I',pcmhead2))
+                            denc.write(struct.pack('I',pcmhead3))
+                            denc.write(struct.pack('I',pcmhead4))
+                            denc.write(formattitle)
+                            denc.write(struct.pack('I',pcmfmt))
+                            denc.write(struct.pack('I',pcmfmt2))
+                            denc.write(marktitle)
+                            denc.write(markbyte)
+                            denc.write(strgtitle)
+                            denc.write(strgbyte)
+                            denc.write(datatitle)
+                            denc.write(struct.pack('I',pcmhead2))
+                            denc.write(data) # important data chunk size from original audio # end header of audio file
+                            denc.write(audioformat)
+                            denc.write(struct.pack('h',numofchannels))
+                            denc.write(riffend) # samplerate, byterate,blockAlign,bitspersample
+                            denc.write(addinfobyte)
+                            denc.write(audiofile) # whole data from original audio 
+                            f.close
+                            denc.close
+                            outputres = output.replace('/','\\')
+                            filepathsize=os.path.getsize(listfiles)
+                            if filepathsize<1000000:
+                                filepathsizefloat = filepathsize/1024
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                bfrfilepathtxt = str(filepathsizefloatdec)+" KB"
+                            elif filepathsize<1000000000:
+                                filepathsizefloat = filepathsize/1024000
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                bfrfilepathtxt = str(filepathsizefloatdec)+" MB"
+                            else:
+                                filepathsizefloat = filepathsize/1024000000
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                bfrfilepathtxt = str(filepathsizefloatdec)+" GB"
+                            filepathsize=os.path.getsize(output+"\\" + audiofilename1 + ".wav.ckd")
+                            if filepathsize<1000000:
+                                filepathsizefloat = filepathsize/1024
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                filepathtxt = str(filepathsizefloatdec)+" KB"
+                            elif filepathsize<1000000000:
+                                filepathsizefloat = filepathsize/1024000
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                filepathtxt = str(filepathsizefloatdec)+" MB"
+                            else:
+                                filepathsizefloat = filepathsize/1024000000
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                filepathtxt = str(filepathsizefloatdec)+" GB"
+                            print('   DONE: '+ outputres + os.path.splitext(listfiles1)[0] + ".wav.ckd "+' \n     Size:'+bfrfilepathtxt+' --> '+filepathtxt+'\n')
+                        except Exception as e:
+                            print('   [ERROR]: The file used from another process\n')
             try:
                 os.mkdir('temp/')
             except:
@@ -784,69 +872,106 @@ def Menu():
                 print('\n   Start Converting...\n')
                 for listfiles in outputaudiofile:
                     listfiles1 = os.path.basename(listfiles)
-                    if(".ogg" in listfiles or ".opus" in listfiles or ".mp3" in listfiles or ".wav" in listfiles):
-                        try:
-                            os.mkdir('temp')
-                        except:
-                            pass
-                        # Other Audio process
-                        try:
-                            run((ffmpegPath), stdout=DEVNULL, stderr=STDOUT)
-                            print('   Running FFMPEG to: '+ listfiles1)
-                            os.system(ffmpegPath+' -y -i "' + listfiles +  '"  -f wav -bitexact -acodec pcm_s16le -ar 48000 -ac '+str(channeljson)+' -filter:a "volume='+volume+'" -map_metadata -1 -loglevel quiet temp/temp.wav')
-                        except:
-                            print("   [ERROR]: FFMPEG is not exist\n\n   1 missing")
-                            time.sleep(1)
-                            BadContinue()
-                        audiofilename1 = os.path.splitext(listfiles1)[0]
-                        Raki()
+                    def startRun():
+                        if(".ogg" in listfiles or ".opus" in listfiles or ".mp3" in listfiles or ".wav" in listfiles):
+                            try:
+                                os.mkdir('temp')
+                            except:
+                                pass
+                            # Other Audio process
+                            try:
+                                run((ffmpegPath), stdout=DEVNULL, stderr=STDOUT)
+                                print('   Running FFMPEG to: '+ listfiles1)
+                                os.system(ffmpegPath+' -y -i "' + listfiles +  '"  -f wav -bitexact -acodec pcm_s16le -ar 48000 -ac '+str(channeljson)+' -filter:a "volume='+volume+'" -map_metadata -1 -loglevel quiet temp/temp.wav')
+                            except:
+                                print("   [ERROR]: FFMPEG is not exist\n")
+                                time.sleep(1)
+                                BadContinue()
+                            audiofilename1 = os.path.splitext(listfiles1)[0]
+                            Raki(audiofilename1,listfiles)
+                    if(os.path.isfile(output+"/"+os.path.splitext(os.path.basename(listfiles))[0]+".wav.ckd")):
+                        print('   File: "'+os.path.basename(listfiles)+'"')
+                        overwritteninput = str(input("   Are you sure that file will be overwritten (y or n)? "))
+                        if overwritteninput=="y" or overwritteninput=="Y":
+                            startRun()
+                        else:
+                            print('   The file: "'+os.path.basename(listfiles)+'" was canceled')
+                    else:
+                        startRun()
             except:
                 pass
         def Opt2():
             def Raki():
-                    if(os.path.isfile("temp/temp.wav")):
-                        print('   Encoding: '+ os.path.basename(audiofilename))
-                        # open data from temp file
-                        with open("temp/temp.wav", "rb") as f:
-                            f.read(12)
-                            formattitle = f.read(4)
-                            bitbyte = f.read(4)
-                            audioformat = f.read(2)
-                            numofchannels = struct.unpack('h',f.read(2))[0]
-                            riffend = f.read(12)
-                            datatitle = f.read(4)
-                            data = f.read(4)
-                            audiofile = f.read()
-                            #Checking when process
-                            try:
-                                with open(output,'wb') as denc:
-                                    denc.write(b'RAKI') # main header of this game
-                                    denc.write(struct.pack('I',11))
-                                    denc.write(b'Nx  pcm ')
-                                    denc.write(struct.pack('I',pcmhead1))
-                                    denc.write(struct.pack('I',pcmhead2))
-                                    denc.write(struct.pack('I',pcmhead3))
-                                    denc.write(struct.pack('I',pcmhead4))
-                                    denc.write(formattitle)
-                                    denc.write(struct.pack('I',pcmfmt))
-                                    denc.write(struct.pack('I',pcmfmt2))
-                                    denc.write(marktitle)
-                                    denc.write(markbyte)
-                                    denc.write(strgtitle)
-                                    denc.write(strgbyte)
-                                    denc.write(datatitle)
-                                    denc.write(struct.pack('I',pcmhead2))
-                                    denc.write(data) # important data chunk size from original audio # end header of audio file
-                                    denc.write(audioformat)
-                                    denc.write(struct.pack('h',numofchannels))
-                                    denc.write(riffend) # samplerate, byterate,blockAlign,bitspersample
-                                    denc.write(addinfobyte)
-                                    denc.write(audiofile) # whole data from original audio 
-                                f.close
-                                denc.close
-                                print("   DONE: " + output.replace('/','\\')+"\\"  + ".wav.ckd \n")
-                            except Exception as e:
-                                print('   [ERROR]: The file used from another process\n')
+                if(os.path.isfile("temp/temp.wav")):
+                    print('   Encoding: '+ os.path.basename(audiofilename))
+                    # open data from temp file
+                    with open("temp/temp.wav", "rb") as f:
+                        f.read(12)
+                        formattitle = f.read(4)
+                        f.read(4)
+                        audioformat = f.read(2)
+                        numofchannels = struct.unpack('h',f.read(2))[0]
+                        riffend = f.read(12)
+                        datatitle = f.read(4)
+                        data = f.read(4)
+                        audiofile = f.read()
+                        #Checking when process
+                        try:
+                            with open(output,'wb') as denc:
+                                denc.write(b'RAKI') # main header of this game
+                                denc.write(struct.pack('I',11))
+                                denc.write(b'Nx  pcm ')
+                                denc.write(struct.pack('I',pcmhead1))
+                                denc.write(struct.pack('I',pcmhead2))
+                                denc.write(struct.pack('I',pcmhead3))
+                                denc.write(struct.pack('I',pcmhead4))
+                                denc.write(formattitle)
+                                denc.write(struct.pack('I',pcmfmt))
+                                denc.write(struct.pack('I',pcmfmt2))
+                                denc.write(marktitle)
+                                denc.write(markbyte)
+                                denc.write(strgtitle)
+                                denc.write(strgbyte)
+                                denc.write(datatitle)
+                                denc.write(struct.pack('I',pcmhead2))
+                                denc.write(data) # important data chunk size from original audio # end header of audio file
+                                denc.write(audioformat)
+                                denc.write(struct.pack('h',numofchannels))
+                                denc.write(riffend) # samplerate, byterate,blockAlign,bitspersample
+                                denc.write(addinfobyte)
+                                denc.write(audiofile) # whole data from original audio 
+                            f.close
+                            denc.close
+                            outputres = output.replace('/','\\')
+                            filepathsize=os.path.getsize(audiofilename)
+                            if filepathsize<1000000:
+                                filepathsizefloat = filepathsize/1024
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                bfrfilepathtxt = str(filepathsizefloatdec)+" KB"
+                            elif filepathsize<1000000000:
+                                filepathsizefloat = filepathsize/1024000
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                bfrfilepathtxt = str(filepathsizefloatdec)+" MB"
+                            else:
+                                filepathsizefloat = filepathsize/1024000000
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                bfrfilepathtxt = str(filepathsizefloatdec)+" GB"
+                            filepathsize=os.path.getsize(outputres)
+                            if filepathsize<1000000:
+                                filepathsizefloat = filepathsize/1024
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                filepathtxt = str(filepathsizefloatdec)+" KB"
+                            elif filepathsize<1000000000:
+                                filepathsizefloat = filepathsize/1024000
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                filepathtxt = str(filepathsizefloatdec)+" MB"
+                            else:
+                                filepathsizefloat = filepathsize/1024000000
+                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                filepathtxt = str(filepathsizefloatdec)+" GB"
+                            print('   DONE: '+ outputres +' \n     Size:'+bfrfilepathtxt+' --> '+filepathtxt+'\n')
+                        except Exception as e:
+                            print('   [ERROR]: The file used from another process\n')
             try:
                 os.mkdir('temp/')
             except:
@@ -863,10 +988,10 @@ def Menu():
                     BadContinue()
                 filenameinfo = os.path.basename(audiofilename)
                 print('   Input file: '+filenameinfo)
-                output = filedialog.asksaveasfilename(filetypes=[("Ubisoft RAKI",'*.wav.ckd')],initialdir=pathlib.Path,title="Select Location",initialfile=os.path.splitext(filenameinfo)[0]+'.wav.ckd')
-                openwindow.destroy()
                 openwindow = Tk()
                 openwindow.title('')
+                output = filedialog.asksaveasfilename(filetypes=[("Ubisoft RAKI",'*.wav.ckd')],initialdir=pathlib.Path,title="Select Location",initialfile=os.path.splitext(filenameinfo)[0]+'.wav.ckd')
+                openwindow.destroy()
                 if(not output):
                     print("   [FAILED]: Tkinter Cancelled")
                     time.sleep(1)
@@ -874,23 +999,22 @@ def Menu():
                 print('   Save file: '+os.path.basename(output))
                 print('\n   Start Converting...\n')
                 if(".ogg" in audiofilename or ".opus" in audiofilename or ".mp3" in audiofilename or ".wav" in audiofilename):
-                        # Other Audio process
-                        try:
-                            os.mkdir('temp')
-                        except:
-                            pass
-                        try:
-                            run((ffmpegPath), stdout=DEVNULL, stderr=STDOUT)
-                            print('   Running FFMPEG to: '+ os.path.basename(output))
-                            os.system(ffmpegPath+' -y -i "' + audiofilename +  '"  -f wav -bitexact -acodec pcm_s16le -ar 48000 -ac '+str(channeljson)+' -filter:a "volume='+volume+'" -map_metadata -1 -loglevel quiet temp/temp.wav')
-                        except:
-                            print("   [ERROR]: FFMPEG is not exist\n\n   1 missing")
-                            time.sleep(1)
-                            BadContinue()
-                        audiofilename1 = os.path.splitext(output)[0]
-                        Raki()
+                    # Other Audio process
+                    try:
+                        os.mkdir('temp')
+                    except:
+                        pass
+                    try:
+                        run((ffmpegPath), stdout=DEVNULL, stderr=STDOUT)
+                        print('   Running FFMPEG to: '+ os.path.basename(output))
+                        os.system(ffmpegPath+' -y -i "' + audiofilename +  '"  -f wav -bitexact -acodec pcm_s16le -ar 48000 -ac '+str(channeljson)+' -filter:a "volume='+volume+'" -map_metadata -1 -loglevel quiet temp/temp.wav')
+                    except:
+                        print("   [ERROR]: FFMPEG is not exist\n")
+                        time.sleep(1)
+                        BadContinue()
+                    Raki()
             except Exception as e:
-                print('     No file found')
+                print('     No file found'+str(e))
         print('\n   Encoding Type: RIFF WAVE (PCM)\n     Header Type: '+namepcmMode+'\n\n   What is your preferred option to convert?\n\n     [1] pick single file\n     [2] pick multiple files\n     [0] Back\n')
         try:
             opt12 = int(input("   Choose the option -----> "))
@@ -922,7 +1046,7 @@ def Menu():
                 print("\n   Run Tkinter:\n")
                 openwindow = Tk()
                 openwindow.title('')
-                outputaudiofile = filedialog.askopenfilenames(initialdir=pathlib.Path, title='Select the audio file', filetypes=(("Audio files (*.wav,*.opus,*.mp3,*.ogg)","*.wav *.opus *.mp3 *.ogg"),("All files","*.*")))
+                outputaudiofile = filedialog.askopenfilenames(initialdir=pathlib.Path, title='Select the audio file', filetypes=(("Audio files (*.wav,*.opus,*.mp3)","*.wav *.opus *.mp3"),("All files","*.*")))
                 openwindow.destroy()
                 if(not outputaudiofile):
                     print("   [FAILED]: Tkinter Cancelled")
@@ -943,17 +1067,54 @@ def Menu():
                 print('\n   Start Converting...\n')
                 for listfiles in outputaudiofile:
                     listfiles1 = os.path.basename(listfiles)
-                    print('   Running FFMPEG to: '+ listfiles1)
-                    if(".ogg" in listfiles or ".opus" in listfiles or ".mp3" in listfiles or ".wav" in listfiles):
-                            # Other Audio process
-                            try:
-                                run((ffmpegPath), stdout=DEVNULL, stderr=STDOUT)
-                                os.system(ffmpegPath+' -y -i "'+listfiles+'"  -acodec libvorbis -ar 48000 -b:a '+str(intbitratevorb)+'k -ac '+str(channeljson)+' -filter:a "volume='+volume+'" -map_metadata -1 -loglevel quiet "'+output+'\\'+os.path.splitext(listfiles1)[0]+'.ogg"')
-                                print("   DONE: " + output.replace('/','\\')+"\\"+os.path.splitext(listfiles1)[0]+'.ogg \n')
-                            except:
-                                print("   [ERROR]: FFMPEG is not exist\n\n   1 missing")
-                                time.sleep(1)
-                                BadContinue()
+                    def startRun():
+                        print('   Running FFMPEG to: '+ listfiles1)
+                        if(".ogg" in listfiles or ".opus" in listfiles or ".mp3" in listfiles or ".wav" in listfiles):
+                                # Other Audio process
+                                try:
+                                    run((ffmpegPath), stdout=DEVNULL, stderr=STDOUT)
+                                    os.system(ffmpegPath+' -y -i "'+listfiles+'"  -acodec libvorbis -ar 48000 -b:a '+str(intbitratevorb)+'k -ac '+str(channeljson)+' -filter:a "volume='+volume+'" -map_metadata -1 -loglevel quiet "'+output+'\\'+os.path.splitext(listfiles1)[0]+'.ogg"')
+                                    outputres = output.replace('/','\\')+"\\"
+                                    filepathsize=os.path.getsize(listfiles)
+                                    if filepathsize<1000000:
+                                        filepathsizefloat = filepathsize/1024
+                                        filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                        bfrfilepathtxt = str(filepathsizefloatdec)+" KB"
+                                    elif filepathsize<1000000000:
+                                        filepathsizefloat = filepathsize/1024000
+                                        filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                        bfrfilepathtxt = str(filepathsizefloatdec)+" MB"
+                                    else:
+                                        filepathsizefloat = filepathsize/1024000000
+                                        filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                        bfrfilepathtxt = str(filepathsizefloatdec)+" GB"
+                                    filepathsize=os.path.getsize(outputres + os.path.splitext(listfiles1)[0] + ".ogg")
+                                    if filepathsize<1000000:
+                                        filepathsizefloat = filepathsize/1024
+                                        filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                        filepathtxt = str(filepathsizefloatdec)+" KB"
+                                    elif filepathsize<1000000000:
+                                        filepathsizefloat = filepathsize/1024000
+                                        filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                        filepathtxt = str(filepathsizefloatdec)+" MB"
+                                    else:
+                                        filepathsizefloat = filepathsize/1024000000
+                                        filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                        filepathtxt = str(filepathsizefloatdec)+" GB"
+                                    print('   DONE: '+ outputres + os.path.splitext(listfiles1)[0] + ".ogg "+' \n     Size:'+bfrfilepathtxt+' --> '+filepathtxt+'\n')
+                                except:
+                                    print("   [ERROR]: FFMPEG is not exist\n")
+                                    time.sleep(1)
+                                    BadContinue()
+                    if(os.path.isfile(output+"/"+os.path.splitext(os.path.basename(listfiles))[0]+".ogg")):
+                        print('   File: "'+os.path.basename(listfiles)+'"')
+                        overwritteninput = str(input("   Are you sure that file will be overwritten (y or n)? "))
+                        if overwritteninput=="y" or overwritteninput=="Y":
+                            startRun()
+                        else:
+                            print('   The file: "'+os.path.basename(listfiles)+'" was canceled')
+                    else:
+                        startRun()
                 Continue()
             except:
                 time.sleep(1)
@@ -962,7 +1123,7 @@ def Menu():
             print("\n   Run Tkinter:\n")
             openwindow = Tk()
             openwindow.title('')
-            audiofilename = filedialog.askopenfilename(initialdir=pathlib.Path, title='Select the audio file', filetypes=(("Audio files (*.wav,*.opus,*.mp3,*.ogg)","*.wav *.opus *.mp3 *.ogg"),("All files","*.*")))
+            audiofilename = filedialog.askopenfilename(initialdir=pathlib.Path, title='Select the audio file', filetypes=(("Audio files (*.wav,*.opus,*.mp3)","*.wav *.opus *.mp3"),("All files","*.*")))
             openwindow.destroy()
             if(not audiofilename):
                 print("   [FAILED]: Tkinter Cancelled")
@@ -986,9 +1147,36 @@ def Menu():
                     run((ffmpegPath), stdout=DEVNULL, stderr=STDOUT)
                     print('   Running FFMPEG to: '+ os.path.basename(audiofilename))
                     os.system(ffmpegPath+' -y -i "' + audiofilename +  '"  -acodec libvorbis -ar 48000  -b:a '+str(intbitratevorb)+'k -ac '+str(channeljson)+' -filter:a "volume='+volume+'" -map_metadata -1 -loglevel quiet "'+output+'"')
-                    print("   DONE: " + output.replace('/','\\') + "\n")
+                    outputres = output.replace('/','\\')
+                    filepathsize=os.path.getsize(audiofilename)
+                    if filepathsize<1000000:
+                        filepathsizefloat = filepathsize/1024
+                        filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                        bfrfilepathtxt = str(filepathsizefloatdec)+" KB"
+                    elif filepathsize<1000000000:
+                        filepathsizefloat = filepathsize/1024000
+                        filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                        bfrfilepathtxt = str(filepathsizefloatdec)+" MB"
+                    else:
+                        filepathsizefloat = filepathsize/1024000000
+                        filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                        bfrfilepathtxt = str(filepathsizefloatdec)+" GB"
+                    filepathsize=os.path.getsize(outputres)
+                    if filepathsize<1000000:
+                        filepathsizefloat = filepathsize/1024
+                        filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                        filepathtxt = str(filepathsizefloatdec)+" KB"
+                    elif filepathsize<1000000000:
+                        filepathsizefloat = filepathsize/1024000
+                        filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                        filepathtxt = str(filepathsizefloatdec)+" MB"
+                    else:
+                        filepathsizefloat = filepathsize/1024000000
+                        filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                        filepathtxt = str(filepathsizefloatdec)+" GB"
+                    print('   DONE: '+ outputres +' \n     Size:'+bfrfilepathtxt+' --> '+filepathtxt+'\n')
                 except:
-                    print("   [ERROR]: FFMPEG is not exist\n\n   1 missing")
+                    print("   [ERROR]: FFMPEG is not exist\n")
                     time.sleep(1)
                     BadContinue()
                 Continue()
@@ -1024,7 +1212,7 @@ def Menu():
             pass
         def o6():
             os.system('cls')
-            print("\n      Choose to application to use to convert\n\n       [1] Use VGMStream (recommended) (requires vgmstream)\n\n       [2] Uncook PCM Data (vgmstream not required)\n           [WARN]: Don't recommended this options because didn't supported to other encoding like opus\n\n       [0] Exit\n")
+            print("\n      Choose to application to use to convert\n\n       [1] Use VGMStream (recommended) (requires vgmstream)\n\n       [2] Uncook from Cooked PCM Data (RAKI-PCM Only) (vgmstream not required)\n\n       [0] Exit\n")
             try:
                 optionforback = int(input('\n     Choose the options -----> '))
             except:
@@ -1062,16 +1250,53 @@ def Menu():
                     print('\n   Start Converting...\n')
                     for listfiles in outputaudiofile:
                         listfiles1 = os.path.basename(listfiles)
-                        if(".ckd" in listfiles):
-                            try:
-                                run((vgmstreamPath), stdout=DEVNULL, stderr=STDOUT) # checks if you have vgmstream
-                                print('\n   Converting back to original audio file: '+ os.path.splitext(listfiles1)[0])
-                                call([vgmstreamPath, '-o', output+ os.path.splitext(listfiles1)[0], listfiles],stdout=DEVNULL, stderr=STDOUT) # main vgmstream commands
-                            except Exception as e:
-                                print('   [ERROR] VGMSTREAM was not exist\n ') # it says not found
-                                time.sleep(1)
-                                BadContinue()
-                            print('   DONE: '+os.path.splitext(listfiles1)[0] +'\n')
+                        def startRun():
+                            if(".ckd" in listfiles):
+                                try:
+                                    run((vgmstreamPath), stdout=DEVNULL, stderr=STDOUT) # checks if you have vgmstream
+                                    print('   Converting back to original audio file: '+ os.path.splitext(listfiles1)[0])
+                                    call([vgmstreamPath, '-o', output+"\\"+ os.path.splitext(listfiles1)[0], listfiles],stdout=DEVNULL, stderr=STDOUT) # main vgmstream commands
+                                except Exception as e:
+                                    print('   [ERROR] VGMSTREAM was not exist\n ') # it says not found
+                                    time.sleep(1)
+                                    BadContinue()
+                                outputres = output.replace('/','\\')
+                                filepathsize=os.path.getsize(listfiles)
+                                if filepathsize<1000000:
+                                    filepathsizefloat = filepathsize/1024
+                                    filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                    bfrfilepathtxt = str(filepathsizefloatdec)+" KB"
+                                elif filepathsize<1000000000:
+                                    filepathsizefloat = filepathsize/1024000
+                                    filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                    bfrfilepathtxt = str(filepathsizefloatdec)+" MB"
+                                else:
+                                    filepathsizefloat = filepathsize/1024000000
+                                    filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                    bfrfilepathtxt = str(filepathsizefloatdec)+" GB"
+                                filepathsize=os.path.getsize(outputres+"\\" + os.path.splitext(listfiles1)[0])
+                                if filepathsize<1000000:
+                                    filepathsizefloat = filepathsize/1024
+                                    filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                    filepathtxt = str(filepathsizefloatdec)+" KB"
+                                elif filepathsize<1000000000:
+                                    filepathsizefloat = filepathsize/1024000
+                                    filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                    filepathtxt = str(filepathsizefloatdec)+" MB"
+                                else:
+                                    filepathsizefloat = filepathsize/1024000000
+                                    filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                    filepathtxt = str(filepathsizefloatdec)+" GB"
+                                print('   DONE: '+ outputres + os.path.splitext(listfiles1)[0] +' \n     Size:'+bfrfilepathtxt+' --> '+filepathtxt+'\n')
+                        if(os.path.isfile(output+"/"+os.path.splitext(os.path.basename(listfiles))[0])):
+                            print('   File: "'+os.path.basename(listfiles)+'"')
+                            overwritteninput = str(input("   Are you sure that file will be overwritten (y or n)? "))
+                            if overwritteninput=="y" or overwritteninput=="Y":
+                                startRun()
+                            else:
+                                print('   The file: "'+os.path.basename(listfiles)+'" was canceled')
+                        else:
+                            startRun()
                 def Opt2():
                     print("\n   Run Tkinter:\n")
                     openwindow = Tk()
@@ -1086,7 +1311,7 @@ def Menu():
                     print('   Input file: '+filenameinfo)
                     openwindow = Tk()
                     openwindow.title('')
-                    output = filedialog.asksaveasfilename(filetypes=[("Wave Format",'*.wav')],initialdir=pathlib.Path,title="Select Location",initialfile=os.path.splitext(filenameinfo)[0]+'.wav')
+                    output = filedialog.asksaveasfilename(filetypes=[("Wave Format",'*.wav')],initialdir=pathlib.Path,title="Select Location",initialfile=os.path.splitext(filenameinfo)[0])
                     openwindow.destroy()
                     if(not output):
                         print("   [FAILED]: Tkinter Cancelled")
@@ -1096,14 +1321,42 @@ def Menu():
                     print('\n   Start Converting...\n')
                     try:
                         run((vgmstreamPath), stdout=DEVNULL, stderr=STDOUT) # checks if you have vgmstream
-                        print('\n   Converting back to original audio file: '+ os.path.splitext(os.path.basename(outputaudiofile))[0])
-                        call([vgmstreamPath, '-o', output+"\\", outputaudiofile],stdout=DEVNULL, stderr=STDOUT) # main vgmstream commands
+                        print('   Converting back to original audio file: '+ os.path.splitext(os.path.basename(outputaudiofile))[0])
+                        call([vgmstreamPath, '-o', output, outputaudiofile],stdout=DEVNULL, stderr=STDOUT) # main vgmstream commands
+                        outputres = output.replace('/','\\')
+                        filepathsize=os.path.getsize(outputaudiofile)
+                        if filepathsize<1000000:
+                            filepathsizefloat = filepathsize/1024
+                            filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                            bfrfilepathtxt = str(filepathsizefloatdec)+" KB"
+                        elif filepathsize<1000000000:
+                            filepathsizefloat = filepathsize/1024000
+                            filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                            bfrfilepathtxt = str(filepathsizefloatdec)+" MB"
+                        else:
+                            filepathsizefloat = filepathsize/1024000000
+                            filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                            bfrfilepathtxt = str(filepathsizefloatdec)+" GB"
+                        filepathsize=os.path.getsize(outputres)
+                        if filepathsize<1000000:
+                            filepathsizefloat = filepathsize/1024
+                            filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                            filepathtxt = str(filepathsizefloatdec)+" KB"
+                        elif filepathsize<1000000000:
+                            filepathsizefloat = filepathsize/1024000
+                            filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                            filepathtxt = str(filepathsizefloatdec)+" MB"
+                        else:
+                            filepathsizefloat = filepathsize/1024000000
+                            filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                            filepathtxt = str(filepathsizefloatdec)+" GB"
+                        print('   DONE: '+ outputres +' \n     Size:'+bfrfilepathtxt+' --> '+filepathtxt+'\n')
                     except Exception as e:
                         print('   [ERROR] VGMSTREAM was not exist\n ') # it says not found
                         time.sleep(1)
                         BadContinue()
-                    print('   DONE: '+os.path.splitext(output)[0] +'\n')
                 def O4():
+                    os.system('cls')
                     print('\n   Uncook Type:VGMStream\n\n   What is your preferred option to convert?\n\n     [1] pick single file\n     [2] pick multiple files\n     [0] Back\n')
                     try:
                         opt12 = int(input("   Choose the option -----> "))
@@ -1146,23 +1399,24 @@ def Menu():
                     print('\n   Start Converting...\n')
                     for listfiles in outputaudiofile:
                         listfiles1 = os.path.basename(listfiles)
-                        if(".ckd" in listfiles1):
-                            with open(listfiles, "rb") as f:
-                                print('\n   Uncook back to original audio file: '+ listfiles)
-                                try:
-                                    uselessbyte = f.read(12)
-                                    pcmchecker = f.read(4) # checks if your file is pcm
-                                except Exception as e:
-                                     print(str(e))
-                                if(pcmchecker== b'pcm '):
-                                    uselessbyte = f.read(28)
-                                    marksig = f.read(4)
-                                    multiplier2 = 0
-                                    if marksig == b'MARK':
+                        def startRun():
+                            if(".ckd" in listfiles1):
+                                with open(listfiles, "rb") as f:
+                                    print('   Uncook back to original audio file: '+ listfiles)
+                                    try:
+                                        f.read(12)
+                                        pcmchecker = f.read(4) # checks if your file is pcm
+                                    except Exception as e:
+                                        print(str(e))
+                                    if(pcmchecker== b'pcm '):
+                                        f.read(28)
+                                        marksig = f.read(4)
+                                        multiplier2 = 0
+                                        if marksig == b'MARK':
                                             try:
-                                                uselessbyte = f.read(4)
+                                                f.read(4)
                                                 multiplier = struct.unpack("i",f.read(4))[0]
-                                                uselessbyte = f.read(8)
+                                                f.read(8)
                                                 multiplier3 = struct.unpack("i",f.read(4))[0]
                                                 multiplier2 = int(multiplier+multiplier3+2)
                                                 datatitle = f.read(4)
@@ -1170,30 +1424,69 @@ def Menu():
                                                 print("wrong wav file")
                                                 time.sleep(1)
                                                 BadContinue()
+                                        else:
+                                            datatitle = marksig
+                                        f.read(4)
+                                        data = f.read(4)
+                                        endriff = f.read(16) # header for riff data
+                                        f.read(multiplier2)
+                                        audiodata = f.read() # audio data
+                                        try:
+                                            encodeback = open(output+"\\" + os.path.splitext(listfiles1)[0], "wb")
+                                            encodeback.write(b'RIFF')  # main title of riff
+                                            encodeback.write(struct.pack("I",int(struct.unpack("I",data)[0]+36))) # whole file length
+                                            encodeback.write(b'WAVEfmt ')
+                                            encodeback.write(struct.pack("I",16)) # full header of riff
+                                            encodeback.write(endriff)
+                                            encodeback.write(datatitle) # data title
+                                            encodeback.write(data)
+                                            encodeback.write(audiodata)
+                                            outputres = output.replace('/','\\')
+                                            filepathsize=os.path.getsize(listfiles)
+                                            if filepathsize<1000000:
+                                                filepathsizefloat = filepathsize/1024
+                                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                                bfrfilepathtxt = str(filepathsizefloatdec)+" KB"
+                                            elif filepathsize<1000000000:
+                                                filepathsizefloat = filepathsize/1024000
+                                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                                bfrfilepathtxt = str(filepathsizefloatdec)+" MB"
+                                            else:
+                                                filepathsizefloat = filepathsize/1024000000
+                                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                                bfrfilepathtxt = str(filepathsizefloatdec)+" GB"
+                                            filepathsize=os.path.getsize(outputres+"\\" + os.path.splitext(listfiles1)[0])
+                                            if filepathsize<1000000:
+                                                filepathsizefloat = filepathsize/1024
+                                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                                filepathtxt = str(filepathsizefloatdec)+" KB"
+                                            elif filepathsize<1000000000:
+                                                filepathsizefloat = filepathsize/1024000
+                                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                                filepathtxt = str(filepathsizefloatdec)+" MB"
+                                            else:
+                                                filepathsizefloat = filepathsize/1024000000
+                                                filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                                filepathtxt = str(filepathsizefloatdec)+" GB"
+                                            print('   DONE: '+ outputres + os.path.splitext(listfiles1)[0] +' \n     Size:'+bfrfilepathtxt+' --> '+filepathtxt+'\n')
+                                        except Exception as e:
+                                            print('   [ERROR] This file is used from another process\n ')
                                     else:
-                                                datatitle = marksig
-                                    uselessbyte = f.read(4)
-                                    data = f.read(4)
-                                    endriff = f.read(16) # header for riff data
-                                    f.read(multiplier2)
-                                    audiodata = f.read() # audio data
-                                    try:
-                                        encodeback = open(output+"\\" + os.path.splitext(listfiles1)[0], "wb")
-                                        encodeback.write(b'RIFF')  # main title of riff
-                                        encodeback.write(struct.pack("I",int(struct.unpack("I",data)[0]+36))) # whole file length
-                                        encodeback.write(b'WAVEfmt ')
-                                        encodeback.write(struct.pack("I",16)) # full header of riff
-                                        encodeback.write(endriff)
-                                        encodeback.write(datatitle) # data title
-                                        encodeback.write(data)
-                                        encodeback.write(audiodata)
-                                        print('   DONE: '+os.path.splitext(listfiles1)[0] +'\n')
-                                    except Exception as e:
-                                        print('   [ERROR] This file is used from another process\n ')
-                                else:
-                                    print('   BAD FILE: "'+listfiles1+ '" this is not pcm file')
+                                        if pcmchecker==b'Nx  ':
+                                            print('   WRONG FILE: "'+listfiles1+'" detects Cooked(Nintendo opus) file')
+                                        else:
+                                            print('   BAD FILE: "'+listfiles1+ '" Undetected file or not pcm')
+                            else:
+                                print('   [ERROR]: This file '+ listfiles1+' is not .ckd')
+                    if(os.path.isfile(output+"/"+os.path.splitext(os.path.basename(listfiles))[0]+".wav")):
+                        print('   File: "'+os.path.basename(listfiles)+'"')
+                        overwritteninput = str(input("   Are you sure that file will be overwritten (y or n)? "))
+                        if overwritteninput=="y" or overwritteninput=="Y":
+                            startRun()
                         else:
-                             print('   [ERROR]: This file '+ listfiles1+' is not .ckd')
+                            print('   The file: "'+os.path.basename(listfiles)+'" was canceled')
+                    else:
+                        startRun()
                 def Opt2():
                     print("\n   Run Tkinter:\n")
                     openwindow = Tk()
@@ -1216,47 +1509,77 @@ def Menu():
                     print('   Save file: '+os.path.basename(output))
                     print('\n   Start Converting...\n')
                     with open(outputaudiofile, "rb") as f:
-                                print('\n   Uncook back to original audio file: '+ os.path.splitext(filenameinfo)[0])
-                                f.read(12)
-                                pcmchecker = f.read(4) # checks if your file is pcm
-                                if(pcmchecker== b'pcm '):
-                                    f.read(28)
-                                    marksig = f.read(4)
-                                    multiplier2 = 0
-                                    if marksig == b'MARK':
-                                            try:
-                                                f.read(4)
-                                                multiplier = struct.unpack("i",f.read(4))[0]
-                                                f.read(8)
-                                                multiplier3 = struct.unpack("i",f.read(4))[0]
-                                                multiplier2 = int(multiplier+multiplier3+2)
-                                                datatitle = f.read(4)
-                                            except Exception as e:
-                                                print("wrong wav file")
-                                                time.sleep(1)
-                                                BadContinue()
-                                    else:
-                                        datatitle = marksig
+                        print('   Uncook back to original audio file: '+ os.path.splitext(filenameinfo)[0])
+                        f.read(12)
+                        pcmchecker = f.read(4) # checks if your file is pcm
+                        if(pcmchecker== b'pcm '):
+                            f.read(28)
+                            marksig = f.read(4)
+                            multiplier2 = 0
+                            if marksig == b'MARK':
+                                try:
                                     f.read(4)
-                                    data = f.read(4)
-                                    endriff = f.read(16) # header for riff data
-                                    f.read(multiplier2)
-                                    audiodata = f.read() # audio data
-                                    try:
-                                        encodeback = open(output, "wb")
-                                        encodeback.write(b'RIFF')  # main title of riff
-                                        encodeback.write(struct.pack("I",int(struct.unpack("I",data)[0]+36))) # whole file length
-                                        encodeback.write(b'WAVEfmt ')
-                                        encodeback.write(struct.pack("I",16)) # full header of riff
-                                        encodeback.write(endriff)
-                                        encodeback.write(datatitle) # data title
-                                        encodeback.write(data)
-                                        encodeback.write(audiodata)
-                                        print('   DONE: '+os.path.splitext(outputaudiofile)[0] +'\n')
-                                    except Exception as e:
-                                        print('   [ERROR] This file is used from another process\n ')
+                                    multiplier = struct.unpack("i",f.read(4))[0]
+                                    f.read(8)
+                                    multiplier3 = struct.unpack("i",f.read(4))[0]
+                                    multiplier2 = int(multiplier+multiplier3+2)
+                                    datatitle = f.read(4)
+                                except Exception as e:
+                                    print("wrong wav file")
+                                    time.sleep(1)
+                                    BadContinue()
+                            else:
+                                datatitle = marksig
+                            f.read(4)
+                            data = f.read(4)
+                            endriff = f.read(16) # header for riff data
+                            f.read(multiplier2)
+                            audiodata = f.read() # audio data
+                            try:
+                                encodeback = open(output, "wb")
+                                encodeback.write(b'RIFF')  # main title of riff
+                                encodeback.write(struct.pack("I",int(struct.unpack("I",data)[0]+36))) # whole file length
+                                encodeback.write(b'WAVEfmt ')
+                                encodeback.write(struct.pack("I",16)) # full header of riff
+                                encodeback.write(endriff)
+                                encodeback.write(datatitle) # data title
+                                encodeback.write(data)
+                                encodeback.write(audiodata)
+                                outputres = outputaudiofile.replace('/','\\')
+                                filepathsize=os.path.getsize(outputaudiofile)
+                                if filepathsize<1000000:
+                                    filepathsizefloat = filepathsize/1024
+                                    filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                    bfrfilepathtxt = str(filepathsizefloatdec)+" KB"
+                                elif filepathsize<1000000000:
+                                    filepathsizefloat = filepathsize/1024000
+                                    filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                    bfrfilepathtxt = str(filepathsizefloatdec)+" MB"
                                 else:
-                                    print('   BAD FILE: "'+outputaudiofile+ '" this is not pcm file')
+                                    filepathsizefloat = filepathsize/1024000000
+                                    filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                    bfrfilepathtxt = str(filepathsizefloatdec)+" GB"
+                                filepathsize=os.path.getsize(outputres)
+                                if filepathsize<1000000:
+                                    filepathsizefloat = filepathsize/1024
+                                    filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                    filepathtxt = str(filepathsizefloatdec)+" KB"
+                                elif filepathsize<1000000000:
+                                    filepathsizefloat = filepathsize/1024000
+                                    filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                    filepathtxt = str(filepathsizefloatdec)+" MB"
+                                else:
+                                    filepathsizefloat = filepathsize/1024000000
+                                    filepathsizefloatdec = "%.2f" % round(filepathsizefloat, 2)
+                                    filepathtxt = str(filepathsizefloatdec)+" GB"
+                                print('   DONE: '+ outputres +' \n     Size:'+bfrfilepathtxt+' --> '+filepathtxt+'\n')
+                            except Exception as e:
+                                print('   [ERROR] This file is used from another process\n ')
+                        else:
+                            if pcmchecker==b'Nx  ':
+                                print('   WRONG FILE: "'+outputaudiofile+'" detects Cooked(Nintendo opus) file')
+                            else:
+                                print('   BAD FILE: "'+outputaudiofile+ '" Undetected file or not pcm')
                 def O5():
                     os.system('cls')
                     print('\n   Uncook Type:Decrypt Cook Wave PCM File (bulit-in)\n\n    What is your preferred option to convert?\n\n     [1] pick single file\n     [2] pick multiple files\n     [0] Back\n')
@@ -1284,7 +1607,7 @@ def Menu():
         BadContinue()
     if(intoption == 6):
         os.system('cls')
-        print('\n   Changelog:\n     Version 1.0\n       - [Feature] New Launch\n       - [Update Print] Improvement CLI\n       - [Feature] Added (back to wav conversion using output)\n       - [Feature] Add feature "Decrypt Data" from command 4 it does not required vgmstream\n       - [Feature] Add feature "Convert Audio using nintendo opus" from Command 1 which may better than ogg compression. [Command 1]\n       - [Optional Feature] Add "Convert Audio To Ogg". [Command 3]\n\n     Version 1.1\n       - [Feature] Add Config to configure the code\n       - [Feature] Add single file on Command 4\n       - [Feature] Adding Brackets in per window\n       - [Feature] Add More audio codes on config\n\n          Ubisoft RAKI PCM Type:\n            Normal - New Header/used for ambs/used for ui\n            Old Version - Old Types of Header/used ui in jd2017-2019\n            TitlePage - Main titlepage in Just Dance\n\n          Ubisoft RAKI Nintendo Opus Types:\n            Normal - New Header/used for ambs/used for ui\n            Old Version - Old Types of Header/used ui in jd2017-2019\n\n       - [Bug Fixed] Fix issues from input directory on Commmand 2\n       - [Bug fixed] Fix issues from Command 3\n       - [Bug Fixed] Fix crash on changelog when exit\n       - [Update ReadMe] Updated ReadMe\n       - [Change] Update Command 5\n\n     Version 1.2\n       - [Change] Change input folder convert type into multiple file\n       - [Bug Fixed] Fix file names from input to output file name\n       - [Removed Feature] remove input, output and outputback folder\n\n     Version 1.3\n       - [Update Info] The info of the config are shown in main menu\n       - [Feature] Add bitrate key in config\n       - [Bug Fixed] Fix bug update\n       - [Bug Fixed] Fix crash detects not pcm from multiple files on "Uncook PCM Data"\n       - [Feature] Add Refresh Function on Menu\n\n     Version 1.4.1 - The New Patch Version\n       - [Version Feature] New Patch Version\n          There was a patch version, if there is a bug again, it will be released again, it will not be in the minor version\n       - [Feature] Add input/output info\n       - [Bug fixed] Fix missing window in tkinter\n       - [Update Print] Update Print (it is no longer messy anymore)\n')
+        print('\n   Changelog:\n     Version 1.0\n       - [Feature] New Launch\n       - [Update Print] Improvement CLI\n       - [Feature] Added (back to wav conversion using output)\n       - [Feature] Add feature "Decrypt Data" from command 4 it does not required vgmstream\n       - [Feature] Add feature "Convert Audio using nintendo opus" from Command 1 which may better than ogg compression. [Command 1]\n       - [Optional Feature] Add "Convert Audio To Ogg". [Command 3]\n\n     Version 1.1\n       - [Feature] Add Config to configure the code\n       - [Feature] Add single file on Command 4\n       - [Feature] Adding Brackets in per window\n       - [Feature] Add More audio codes on config\n\n          Ubisoft RAKI PCM Type:\n            Normal - New Header/used for ambs/used for ui\n            Old Version - Old Types of Header/used ui in jd2017-2019\n            TitlePage - Main titlepage in Just Dance\n\n          Ubisoft RAKI Nintendo Opus Types:\n            Normal - New Header/used for ambs/used for ui\n            Old Version - Old Types of Header/used ui in jd2017-2019\n\n       - [Bug Fixed] Fix issues from input directory on Commmand 2\n       - [Bug fixed] Fix issues from Command 3\n       - [Bug Fixed] Fix crash on changelog when exit\n       - [Update ReadMe] Updated ReadMe\n       - [Change] Update Command 5\n\n     Version 1.2\n       - [Change] Change input folder convert type into multiple file\n       - [Bug Fixed] Fix file names from input to output file name\n       - [Removed Feature] remove input, output and outputback folder\n\n     Version 1.3\n       - [Update Info] The info of the config are shown in main menu\n       - [Feature] Add bitrate key in config\n       - [Bug Fixed] Fix bug update\n       - [Bug Fixed] Fix crash detects not pcm from multiple files on "Uncook PCM Data"\n       - [Feature] Add Refresh Function on Menu\n\n     Version 1.4.1 - The New Patch Version\n       - [Version Feature] New Patch Version\n          There was a patch version, if there is a bug again, it will be released again, it will not be in the minor version\n       - [Feature] Add input/output info\n       - [Bug fixed] Fix missing window in tkinter\n       - [Update Print] Update Print (it is no longer messy anymore)\n\n     Version 1.4.2\n       - [Removed Bug] Fixed Double ".wav" extension on Command 4\n       - [Removed Feature] Fixed .ogg input from tkinter(file dialog) on Command 3\n       - [Add Feature] Add size on the result file\n       - [Fixed Bug] Fixed Code on VGMStream\n       - [Fixed Script] Fixed the far spaced on this script\n       - [Fixed Bug] Added reminder to know a file alredy exists on multple files\n')
         time.sleep(1)
         BadContinue()
     if(intoption > 6 or intoption < 0):
@@ -1295,11 +1618,27 @@ def Continue():
         os.remove('temp/temp.wav')
     except:
         pass
+    try:
+        os.remove('temp/temp.lopus')
+    except:
+        pass
+    try:
+        os.rmdir('temp')
+    except:
+        pass
     input("   Press Enter to continue...")
     Menu()
 def BadContinue():
     try:
         os.remove('temp/temp.wav')
+    except:
+        pass
+    try:
+        os.remove('temp/temp.lopus')
+    except:
+        pass
+    try:
+        os.rmdir('temp')
     except:
         pass
     print('\n')

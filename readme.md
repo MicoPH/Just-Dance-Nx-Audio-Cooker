@@ -77,6 +77,15 @@ _A:the codename on Nintendo Switch_
 - <span style="color:#4ae75d">[Feature]</span> Add folde/directory base path info 
 - <span style="color:#f1f11f">[Bug Fixed]</span> Fix missing window in tkinter
 - <span style="color:#21dde2">[Update Print]</span> Update Print (it is no longer messy anymore)
+
+### Version 1.4.2
+- [Removed Bug] Fixed Double ".wav" extension on Command 4
+- [Removed Feature] Fixed .ogg input from tkinter(file dialog) on Command 3
+- [Add Feature] Add size on the result file
+- [Fixed Bug] Fixed Code on VGMStream
+- [Fixed Script] Fixed the far spaced on this script
+- [Fixed Bug] Added reminder to know a file alredy exists on multple files
+
 ---
 ## Supported Formats
 - `.ogg` - Ogg Vorbis
