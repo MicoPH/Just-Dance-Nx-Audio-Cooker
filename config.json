@@ -1,14 +1,14 @@
 {
     "addVolume": 1,    
-    "version": 1.3,
-    "pcmMode": "oldVersion",
+    "version": 1.5,
+    "pcmMode": "normal",
     "opusMode": "normal",
     "channel": 2,
     "ffmpegPath": "ffmpeg",
     "nintendoVGAudioPath": "VGAudioCli",
     "vgmstreamPath": "vgmstream",
-    "opusbitrate": 128000,
-    "vorbisbitrate": 320000,
+    "opusbitrate": 256000,
+    "vorbisbitrate": 256000,
     "pcmModeData":[
         {
             "id": 1,

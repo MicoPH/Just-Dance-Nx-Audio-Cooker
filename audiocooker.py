@@ -1206,10 +1206,6 @@ def Menu():
         os.system('cls')
         O3()
     if(intoption == 4):
-        try:
-            os.mkdir('outputback')
-        except:
-            pass
         def o6():
             os.system('cls')
             print("\n      Choose to application to use to convert\n\n       [1] Use VGMStream (recommended) (requires vgmstream)\n\n       [2] Uncook from Cooked PCM Data (RAKI-PCM Only) (vgmstream not required)\n\n       [0] Exit\n")
