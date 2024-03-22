@@ -1,11 +1,14 @@
 # **Just Dance Audio Cooker**
 - [MicoPH](https://github.com/MicoPH/)
+- [MZommer](https://github.com/MZommer) - UbiArtPY
+- [VGMStream](https://github.com/vgmstream) - VGMStream
+- [Thealexbarney](https://github.com/Thealexbarney) - VGAudio
 ## Requirements
 
 ---
-- `FFMPEG` -  ffmpeg.org - [Link](https://ffmpeg.org)
-* `VGMStream` - Backup Audio (include in `audiotools.zip`)
-* `VGAudio` - for Nintendo Switch _Opus_ (include in `audiotools.zip`) 
+- [FFMPEG](https://ffmpeg.org) -  ffmpeg.org - [Link](https://ffmpeg.org)
+- [VGMStream](https://github.com/vgmstream/vgmstream) - Backup Audio (include in `audiotools.zip`)
+- [VGAudio](https://github.com/Thealexbarney/VGAudio) - for Nintendo Switch _Opus_ (include in `audiotools.zip`) 
 
 ---
 

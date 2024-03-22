@@ -63,3 +63,12 @@
 - [Improved feature] Detects missing app when open
 - [Improved ffmpeg request] Change ffmpeg os.system to subprocess
 - [Update Feature] Last minor version
+
+### Version 1.5.1
+- [Improvement Print] Improve Print Console in Settings
+- [Bug Fixes] Fixed VGAudio input temp not found
+- [Settings] Volume numbers are now divided to 100 in config and change 2 option in path environment
+- [Custom Value Settings] Fixed bug in custom volume and gets back in pressing enter in 3 times same as change bitrate
+- [Exit Bug] Fixed bug the from exit
+- [Old Config] Old config.json from 1.0 are now updated
+- [App Wrong Detector] in FFMPEG, VGMStream and VGAudio are now detected to file if your requirements is wrong
