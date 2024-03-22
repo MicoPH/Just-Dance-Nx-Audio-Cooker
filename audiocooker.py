@@ -388,13 +388,21 @@ def Menu():
         time.sleep(2)
         exit()
     try:
+        autobitupd=con["vorbisbitrate"]
+    except:
+        autobitupd=0
+    try:
+        autobitupd1=con["opusbitrate"]
+    except:
+        autobitupd1=0
+    try:
         ver=float(con["version"])
     except:
-        conjson1(volume,modepcm,modeopus,channeljson,ffmpegPath,vgaudioPath,vgmstreamPath,con["opusbitrate"],con["opusbitrate"],0)
+        conjson1(volume,modepcm,modeopus,channeljson,ffmpegPath,vgaudioPath,vgmstreamPath,autobitupd1,autobitupd,0)
     if ver==1.5:
         pass
     else:
-        conjson1(volume,modepcm,modeopus,channeljson,ffmpegPath,vgaudioPath,vgmstreamPath,con["opusbitrate"],con["vorbisbitrate"],0)
+        conjson1(volume,modepcm,modeopus,channeljson,ffmpegPath,vgaudioPath,vgmstreamPath,autobitupd1,autobitupd,0)
     for nopusitems1 in con["opusModeData"]:
         if nopusitems1["opusModeType"]==modeopus:
             title0=str(nopusitems1["opusTitle"])
@@ -402,17 +410,17 @@ def Menu():
         if pcmitems1["pcmModeType"]==modepcm:
             title1=str(pcmitems1["pcmtitle"])
     if getpcm==0:
-            namepcmMode="Invalid pcm"
+        namepcmMode="Invalid pcm"
     elif(modepcm=="normal" or modepcm=="oldVersion" or modepcm=="titlepage"):
-            namepcmMode=title1
+        namepcmMode=title1
     else:
-            namepcmMode=str(title0+" (Custom Mode)")
+        namepcmMode=str(title0+" (Custom Mode)")
     if getopus==0:
-            nameopusMode="Invalid opus"
+        nameopusMode="Invalid opus"
     elif(modeopus=="normal" or modeopus=="oldVersion"):
-            nameopusMode=title0
+        nameopusMode=title0
     else:
-            nameopusMode=str(title0+" (Custom Mode)")
+        nameopusMode=str(title0+" (Custom Mode)")
     if channeljson==1:
         txtchanneljson="Channel Type: Mono"
     else:
@@ -473,7 +481,7 @@ def Menu():
     try:
         call((vgaudioPath), stdout=DEVNULL, stderr=STDOUT)
         vgaudio=1
-        vgaudiomisdesc="VGMAudio - Convert WAVE to Nintendo opus format (found)"
+        vgaudiomisdesc="VGAudio - Convert WAVE to Nintendo opus format (found)"
     except:
         vgaudio=0
         vgaudiomisdesc="VGAudio - Convert WAVE to Nintendo opus format (not found) - extract the audiotools.zip"
@@ -491,7 +499,7 @@ def Menu():
     else:
         missing=""
     os.system('cls')
-    print('\n Welcome to Just Dance Nx Audio Maker \n (Version 1.5.0)\n    Made by MicoPH  \n    If refresh. click Enter'+notchan+noteopus+notevorb+'\n\n   Requirements:\n     '+ffmpegmisdesc+' \n     '+vgaudiomisdesc+'\n     '+vgmstreammisdesc+missing+'\n\n   PCM Mode: '+namepcmMode+" | Opus Mode: "+nameopusMode+"\n   "+txtchanneljson+" | "+txtvolumeset+"\n   "+bitrateopustxt+" | "+bitratevorbistxt+"\n\n     Choose the Options:\n     [1] Convert Audio to cooked nintendo opus file (Most recommended) (for songs only)\n     [2] Convert Audio to cooked pcm .wav format (this is only for amb, ui(sfx) and ui(pcm)\n     [3] Convert Audio to Ogg (optional feature)\n     [4] Convert Back to WAV FILE(.wav.ckd to .wav)\n     [5] Help\n     [6] Changelog\n     [7] Settings\n     [0] Exit\n\n")
+    print('\n Welcome to Just Dance Nx Audio Maker \n (Version 1.5.1)\n    Made by MicoPH  \n    If refresh. click Enter'+notchan+noteopus+notevorb+'\n\n   Requirements:\n     '+ffmpegmisdesc+' \n     '+vgaudiomisdesc+'\n     '+vgmstreammisdesc+missing+'\n\n   PCM Mode: '+namepcmMode+" | Opus Mode: "+nameopusMode+"\n   "+txtchanneljson+" | "+txtvolumeset+"\n   "+bitrateopustxt+" | "+bitratevorbistxt+"\n\n     Choose the Options:\n     [1] Convert Audio to cooked nintendo opus file (Most recommended) (for songs only)\n     [2] Convert Audio to cooked pcm .wav format (this is only for amb, ui(sfx) and ui(pcm)\n     [3] Convert Audio to Ogg (optional feature)\n     [4] Convert Back to WAV FILE(.wav.ckd to .wav)\n     [5] Help\n     [6] Changelog\n     [7] Settings\n     [0] Exit\n\n")
     try:
         option=str(input("   Choose the option -----> "))
     except:
@@ -505,8 +513,8 @@ def Menu():
         time.sleep(1)
         Menu()
     if(intoption==0):
-            time.sleep(2)
-            exit()
+        time.sleep(2)
+        exit()
     def O1():
         os.system('cls')
         def Opt1():
@@ -591,7 +599,7 @@ def Menu():
                                 filepathsizefloat=filepathsize/1024000000
                                 filepathsizefloatdec="%.2f" % round(filepathsizefloat, 2)
                                 filepathtxt=str(filepathsizefloatdec)+" GB"
-                            print('   DONE: '+ outputres + os.path.splitext(listfiles1)[0] + ".wav.ckd "+' \n     Size:'+bfrfilepathtxt+' --> '+filepathtxt+'\n')
+                            print('   DONE: '+ outputres + os.path.splitext(listfiles1)[0] + ".wav.ckd "+' \n     Size: '+bfrfilepathtxt+' --> '+filepathtxt+'\n')
                         except:
                             print('   [ERROR]: The file used from another process\n')
             try:
@@ -603,8 +611,8 @@ def Menu():
                 if(not outputaudiofile):
                     print("   [FAILED]: Tkinter Cancelled")
                     time.sleep(1)
-                    BadContinue()
-                print('   Input files:')
+                    Continue()
+                print('   Input files: ')
                 for lstinfo in outputaudiofile:
                     print('     '+os.path.basename(lstinfo))
                 openwindow=Tk()
@@ -615,7 +623,8 @@ def Menu():
                 if(not output):
                     print("   [FAILED]: Tkinter Cancelled")
                     time.sleep(1)
-                    BadContinue()
+                    Continue()
+                    exit()
                 print('\n   Start Converting...\n')
                 for listfiles in outputaudiofile:
                     def startRun():
@@ -628,22 +637,32 @@ def Menu():
                                     pass
                                 run((ffmpegPath), stdout=DEVNULL, stderr=STDOUT)
                                 print('   Running FFMPEG to: '+ listfiles1)
-                                call([ffmpegPath,'-y','-i',listfiles,'-f','wav','-bitexact','-ar','48000','-ac',str(channeljson),'-filter:a','volume='+volume,'-map_metadata','-1','temp/temp.wav'],stdout=DEVNULL, stderr=STDOUT)
+                                call([ffmpegPath,'-y','-i',listfiles,'-f','wav','-bitexact','-ar','48000','-ac',str(channeljson),'-filter:a','volume='+volume,'-map_metadata','-1',os.getcwd()+'\\temp\\temp.wav'],stdout=DEVNULL, stderr=STDOUT)
+                                if not os.path.isfile(os.getcwd()+'\\temp\\temp.wav'):
+                                    print('\n     [ERROR]: Not recognized FFMPEG\n')
+                                    Continue()
+                                    exit()
                                 try:
                                     run((vgaudioPath), stdout=DEVNULL, stderr=STDOUT)
                                     print('   Running VGAudio: '+ listfiles1)
                                     if bitrateopus==0:
-                                        call([vgaudioPath, 'temp/temp.wav', 'temp/temp.lopus', '--no-loop', '--opusheader','standard'],stdout=DEVNULL, stderr=STDOUT)
+                                        call([vgaudioPath, os.getcwd()+'\\temp\\temp.wav', os.getcwd()+'\\temp\\temp.lopus', '--no-loop', '--opusheader','standard'],stdout=DEVNULL, stderr=STDOUT)
                                     else:
-                                        call([vgaudioPath, 'temp/temp.wav', 'temp/temp.lopus', '--bitrate', str(bitrateopus), '--no-loop', '--opusheader','standard'],stdout=DEVNULL, stderr=STDOUT)
+                                        call([vgaudioPath, os.getcwd()+'\\temp\\temp.wav', os.getcwd()+'\\temp\\temp.lopus', '--bitrate', str(bitrateopus), '--no-loop', '--opusheader','standard'],stdout=DEVNULL, stderr=STDOUT)
                                 except:
-                                    print("     [ERROR]: VGAudio (Nintendo opus) is not exist\n")
+                                    print("     [ERROR]: VGAudio (Nintendo opus) is not initialized\n")
                                     time.sleep(1)
-                                    BadContinue()
+                                    Continue()
+                                    exit()
+                                if not os.path.isfile(os.getcwd()+'\\temp\\temp.lopus'):
+                                    print('\n     [ERROR]: Not recognized VGAudio\n')
+                                    Continue()
+                                    exit()
                             except:
-                                print("   [ERROR]: FFMPEG is not exist\n")
+                                print("   [ERROR]: FFMPEG is not initialized\n")
                                 time.sleep(1)
-                                BadContinue()
+                                Continue()
+                                exit()
                             Raki(os.path.splitext(listfiles1)[0],listfiles1,listfiles)
                     if(os.path.isfile(output+"/"+os.path.splitext(os.path.basename(listfiles))[0]+".wav.ckd")):
                         print('   File: "'+os.path.basename(listfiles)+'"')
@@ -738,7 +757,7 @@ def Menu():
                                 filepathsizefloat=filepathsize/1024000000
                                 filepathsizefloatdec="%.2f" % round(filepathsizefloat, 2)
                                 filepathtxt=str(filepathsizefloatdec)+" GB"
-                            print('   DONE: '+ outputres +' \n     Size:'+bfrfilepathtxt+' --> '+filepathtxt+'\n')
+                            print('   DONE: '+ outputres +' \n     Size: '+bfrfilepathtxt+' --> '+filepathtxt+'\n')
                             time.sleep(1)
                         except Exception as e:
                             print('   [ERROR]: The file used from another process\n')
@@ -752,7 +771,8 @@ def Menu():
                 if(not audiofilename):
                     print("   [FAILED]: Tkinter Cancelled")
                     time.sleep(1)
-                    BadContinue()
+                    Continue()
+                    exit()
                 filenameinfo=os.path.basename(audiofilename)
                 print('   Input file: '+filenameinfo)
                 openwindow=Tk()
@@ -762,7 +782,7 @@ def Menu():
                 if(not output):
                     print("   [FAILED]: Tkinter Cancelled")
                     time.sleep(1)
-                    BadContinue()
+                    Continue()
                 print('   Save file: '+os.path.basename(output))
                 print('\n   Start Converting...\n')
                 try:
@@ -772,22 +792,32 @@ def Menu():
                 try:
                     run((ffmpegPath), stdout=DEVNULL, stderr=STDOUT)
                     print('   Running FFMPEG to: '+ filenameinfo)
-                    call([ffmpegPath,'-y','-i',audiofilename,'-f','wav','-bitexact','-ar','48000','-ac',str(channeljson),'-filter:a','volume='+volume,'-map_metadata','-1','temp/temp.wav'],stdout=DEVNULL, stderr=STDOUT)
+                    call([ffmpegPath,'-y','-i',audiofilename,'-f','wav','-bitexact','-ar','48000','-ac',str(channeljson),'-filter:a','volume='+volume,'-map_metadata','-1',os.getcwd()+'\\temp\\temp.wav'],stdout=DEVNULL, stderr=STDOUT)
+                    if not os.path.isfile(os.getcwd()+'\\temp\\temp.wav'):
+                        print('\n     [ERROR]: Not recognized FFMPEG\n')
+                        Continue()
+                        exit()
                     try:
                         run((vgaudioPath), stdout=DEVNULL, stderr=STDOUT)
                         print('   Running VGAudio: '+filenameinfo)
                         if bitrateopus==0:
-                            call([vgaudioPath, 'temp/temp.wav', 'temp/temp.lopus', '--no-loop', '--opusheader','standard'],stdout=DEVNULL, stderr=STDOUT)
+                            call([vgaudioPath, os.getcwd()+'\\temp\\temp.wav', os.getcwd()+'\\temp\\temp.lopus', '--no-loop', '--opusheader','standard'],stdout=DEVNULL, stderr=STDOUT)
                         else:
-                            call([vgaudioPath, 'temp/temp.wav', 'temp/temp.lopus', '--bitrate', str(bitrateopus), '--no-loop', '--opusheader','standard'],stdout=DEVNULL, stderr=STDOUT)
+                            call([vgaudioPath, os.getcwd()+'\\temp\\temp.wav', os.getcwd()+'\\temp\\temp.lopus', '--bitrate', str(bitrateopus), '--no-loop', '--opusheader','standard'],stdout=DEVNULL, stderr=STDOUT)
                     except:
-                        print("     [ERROR]: VGAudio (Nintendo opus) is not exist\n")
+                        print("     [ERROR]: VGAudio (Nintendo opus) is not initialized\n")
                         time.sleep(1)
-                        BadContinue()
+                        Continue()
+                        exit()
+                    if not os.path.isfile(os.getcwd()+'\\temp\\temp.lopus'):
+                        print('\n     [ERROR]: Not recognized VGAudio\n')
+                        Continue()
+                        exit()
                 except Exception as e:
-                    print("   [ERROR]: FFMPEG is not exist\n")
+                    print("   [ERROR]: FFMPEG is not initialized\n")
                     time.sleep(1)
-                    BadContinue()
+                    Continue()
+                    exit()
                 Raki()
             except:
                 pass
@@ -811,20 +841,26 @@ def Menu():
     if(intoption==1):
         if ffmpeg==0 and vgaudio==0:
             print('     FFMPEG and VGAudio is missing')
+            time.sleep(1)
+            Menu()
+            exit()
         if ffmpeg==0:
             print('     FFMPEG not found')
             time.sleep(1)
             Menu()
+            exit()
         if vgaudio==0:
             print('     VGAudio not found')
             time.sleep(1)
             Menu()
+            exit()
         if getopus==1 and ffmpeg==1 and vgaudio==1:
             O1()
         else:
             print('     Invalid Mode. reconfig the config.json')
             time.sleep(1)
             Menu()
+            exit()
     def O2():
         os.system('cls')
         def Opt1():
@@ -894,7 +930,7 @@ def Menu():
                                 filepathsizefloat=filepathsize/1024000000
                                 filepathsizefloatdec="%.2f" % round(filepathsizefloat, 2)
                                 filepathtxt=str(filepathsizefloatdec)+" GB"
-                            print('   DONE: '+ outputres + os.path.splitext(listfiles1)[0] + ".wav.ckd "+' \n     Size:'+bfrfilepathtxt+' --> '+filepathtxt+'\n')
+                            print('   DONE: '+ outputres + os.path.splitext(listfiles1)[0] + ".wav.ckd "+' \n     Size: '+bfrfilepathtxt+' --> '+filepathtxt+'\n')
                         except Exception as e:
                             print('   [ERROR]: The file used from another process\n')
             try:
@@ -910,8 +946,9 @@ def Menu():
                 if(not outputaudiofile):
                     print("   [FAILED]: Tkinter Cancelled")
                     time.sleep(1)
-                    BadContinue()
-                print('   Input files:')
+                    Continue()
+                    exit()
+                print('   Input files: ')
                 for lstinfo in outputaudiofile:
                     print('     '+os.path.basename(lstinfo))
                 openwindow=Tk()
@@ -921,7 +958,8 @@ def Menu():
                 if(not output):
                     print("   [FAILED]: Tkinter Cancelled")
                     time.sleep(1)
-                    BadContinue()
+                    Continue()
+                    exit()
                 print('   Directory: '+os.path.basename(output))
                 print('\n   Start Converting...\n')
                 for listfiles in outputaudiofile:
@@ -935,11 +973,16 @@ def Menu():
                             try:
                                 run((ffmpegPath), stdout=DEVNULL, stderr=STDOUT)
                                 print('   Running FFMPEG to: '+ listfiles1)
-                                call([ffmpegPath,'-y','-i',listfiles,'-f','wav','-bitexact','-ar','48000','-ac',str(channeljson),'-filter:a','volume='+volume,'-map_metadata','-1','temp/temp.wav'],stdout=DEVNULL, stderr=STDOUT)
+                                call([ffmpegPath,'-y','-i',listfiles,'-f','wav','-bitexact','-ar','48000','-ac',str(channeljson),'-filter:a','volume='+volume,'-map_metadata','-1',os.getcwd()+'\\temp\\temp.wav'],stdout=DEVNULL, stderr=STDOUT)
                             except:
-                                print("   [ERROR]: FFMPEG is not exist\n")
+                                print("   [ERROR]: FFMPEG is not initialized\n")
                                 time.sleep(1)
-                                BadContinue()
+                                Continue()
+                                exit()
+                            if not os.path.isfile(os.getcwd()+'\\temp\\temp.wav'):
+                                print('\n     [ERROR]: Not recognized FFMPEG\n')
+                                Continue()
+                                exit()
                             audiofilename1=os.path.splitext(listfiles1)[0]
                             Raki(audiofilename1,listfiles)
                     if(os.path.isfile(output+"/"+os.path.splitext(os.path.basename(listfiles))[0]+".wav.ckd")):
@@ -1020,7 +1063,7 @@ def Menu():
                                 filepathsizefloat=filepathsize/1024000000
                                 filepathsizefloatdec="%.2f" % round(filepathsizefloat, 2)
                                 filepathtxt=str(filepathsizefloatdec)+" GB"
-                            print('   DONE: '+ outputres +' \n     Size:'+bfrfilepathtxt+' --> '+filepathtxt+'\n')
+                            print('   DONE: '+ outputres +' \n     Size: '+bfrfilepathtxt+' --> '+filepathtxt+'\n')
                         except Exception as e:
                             print('   [ERROR]: The file used from another process\n')
             try:
@@ -1036,7 +1079,8 @@ def Menu():
                 if(not audiofilename):
                     print("   [FAILED]: Tkinter Cancelled")
                     time.sleep(1)
-                    BadContinue()
+                    Continue()
+                    exit()
                 filenameinfo=os.path.basename(audiofilename)
                 print('   Input file: '+filenameinfo)
                 openwindow=Tk()
@@ -1046,7 +1090,8 @@ def Menu():
                 if(not output):
                     print("   [FAILED]: Tkinter Cancelled")
                     time.sleep(1)
-                    BadContinue()
+                    Continue()
+                    exit()
                 print('   Save file: '+os.path.basename(output))
                 print('\n   Start Converting...\n')
                 if(".ogg" in audiofilename or ".opus" in audiofilename or ".mp3" in audiofilename or ".wav" in audiofilename):
@@ -1057,11 +1102,16 @@ def Menu():
                     try:
                         run((ffmpegPath), stdout=DEVNULL, stderr=STDOUT)
                         print('   Running FFMPEG to: '+ os.path.basename(output))
-                        call([ffmpegPath,'-y','-i',audiofilename,'-f','wav','-bitexact','-ar','48000','-ac',str(channeljson),'-filter:a','volume='+volume,'-map_metadata','-1','temp/temp.wav'],stdout=DEVNULL, stderr=STDOUT)
+                        call([ffmpegPath,'-y','-i',audiofilename,'-f','wav','-bitexact','-ar','48000','-ac',str(channeljson),'-filter:a','volume='+volume,'-map_metadata','-1',os.getcwd()+'\\temp\\temp.wav'],stdout=DEVNULL, stderr=STDOUT)
                     except:
-                        print("   [ERROR]: FFMPEG is not exist\n")
+                        print("   [ERROR]: FFMPEG is not initialized\n")
                         time.sleep(1)
-                        BadContinue()
+                        Continue()
+                        exit()
+                    if not os.path.isfile(os.getcwd()+'\\temp\\temp.wav'):
+                        print('\n     [ERROR]: Not recognized FFMPEG\n')
+                        Continue()
+                        exit()
                     Raki()
             except Exception as e:
                 print('     No file found'+str(e))
@@ -1086,6 +1136,7 @@ def Menu():
             print('     FFMPEG not found')
             time.sleep(1)
             Menu()
+            exit()
         if getpcm==1:
             O2()
         else:
@@ -1105,8 +1156,9 @@ def Menu():
                 if(not outputaudiofile):
                     print("   [FAILED]: Tkinter Cancelled")
                     time.sleep(1)
-                    BadContinue()
-                print('   Input files:')
+                    Continue()
+                    exit()
+                print('   Input files: ')
                 for lstinfo in outputaudiofile:
                     print('     '+os.path.basename(lstinfo))
                 openwindow=Tk()
@@ -1116,7 +1168,8 @@ def Menu():
                 if(not output):
                     print("   [FAILED]: Tkinter Cancelled")
                     time.sleep(1)
-                    BadContinue()
+                    Continue()
+                    exit()
                 print('   Directory: '+os.path.basename(output))
                 print('\n   Start Converting...\n')
                 for listfiles in outputaudiofile:
@@ -1130,6 +1183,9 @@ def Menu():
                                     call([ffmpegPath,'-y','-i',listfiles,'-acodec','libvorbis','-ar','48000','-ac',str(channeljson),'-filter:a','volume='+volume,'-map_metadata','-1',output+'\\'+os.path.splitext(listfiles1)[0]+'.ogg'],stdout=DEVNULL, stderr=STDOUT)
                                 else:
                                     call([ffmpegPath,'-y','-i',listfiles,'-acodec','libvorbis','-ar','48000','-b:a',str(intbitratevorb)+'k','-ac',str(channeljson),'-filter:a','volume='+volume,'-map_metadata','-1',output+'\\'+os.path.splitext(listfiles1)[0]+'.ogg'],stdout=DEVNULL, stderr=STDOUT)
+                                if not os.path.isfile(output+'\\'+os.path.splitext(listfiles1)[0]+'.ogg'):
+                                    Continue()
+                                    exit()
                                 outputres=output.replace('/','\\')+"\\"
                                 filepathsize=os.path.getsize(listfiles)
                                 if filepathsize<1000000:
@@ -1157,11 +1213,12 @@ def Menu():
                                     filepathsizefloat=filepathsize/1024000000
                                     filepathsizefloatdec="%.2f" % round(filepathsizefloat, 2)
                                     filepathtxt=str(filepathsizefloatdec)+" GB"
-                                print('   DONE: '+ outputres + os.path.splitext(listfiles1)[0] + ".ogg "+' \n     Size:'+bfrfilepathtxt+' --> '+filepathtxt+'\n')
+                                print('   DONE: '+ outputres + os.path.splitext(listfiles1)[0] + ".ogg "+' \n     Size: '+bfrfilepathtxt+' --> '+filepathtxt+'\n')
                             except:
-                                print("   [ERROR]: FFMPEG is not exist\n")
+                                print("   [ERROR]: FFMPEG is not initialized\n")
                                 time.sleep(1)
-                                BadContinue()
+                                Continue()
+                                exit()
                     if(os.path.isfile(output+"/"+os.path.splitext(os.path.basename(listfiles))[0]+".ogg")):
                         print('   File: "'+os.path.basename(listfiles)+'"')
                         overwritteninput=str(input("   Are you sure that file will be overwritten (y or n)? "))
@@ -1174,7 +1231,8 @@ def Menu():
                 Continue()
             except:
                 time.sleep(1)
-                BadContinue()
+                Continue()
+                exit()
         def Opt2():
             print("\n   Run Tkinter:\n")
             openwindow=Tk()
@@ -1184,7 +1242,7 @@ def Menu():
             if(not audiofilename):
                 print("   [FAILED]: Tkinter Cancelled")
                 time.sleep(1)
-                BadContinue()
+                Continue()
             audiofilename1=os.path.basename(audiofilename)
             print('   Input file: '+audiofilename1)
             openwindow=Tk()
@@ -1195,7 +1253,7 @@ def Menu():
             if(not output):
                 print("   [FAILED]: Tkinter Cancelled")
                 time.sleep(1)
-                BadContinue()
+                Continue()
             try:
                 print('\n   Start Converting...\n')
                 try:
@@ -1205,6 +1263,9 @@ def Menu():
                         call([ffmpegPath,'-y','-i',audiofilename,'-acodec','libvorbis','-ar','48000','-ac',str(channeljson),'-filter:a','volume='+volume,'-map_metadata','-1',output],stdout=DEVNULL, stderr=STDOUT)
                     else:
                         call([ffmpegPath,'-y','-i',audiofilename,'-acodec','libvorbis','-ar','48000','-b:a',str(intbitratevorb)+'k','-ac',str(channeljson),'-filter:a','volume='+volume,'-map_metadata','-1',output],stdout=DEVNULL, stderr=STDOUT)
+                    if not os.path.isfile(output):
+                        Continue()
+                        exit()
                     outputres=output.replace('/','\\')
                     filepathsize=os.path.getsize(audiofilename)
                     if filepathsize<1000000:
@@ -1232,15 +1293,16 @@ def Menu():
                         filepathsizefloat=filepathsize/1024000000
                         filepathsizefloatdec="%.2f" % round(filepathsizefloat, 2)
                         filepathtxt=str(filepathsizefloatdec)+" GB"
-                    print('   DONE: '+ outputres +' \n     Size:'+bfrfilepathtxt+' --> '+filepathtxt+'\n')
+                    print('   DONE: '+ outputres +' \n     Size: '+bfrfilepathtxt+' --> '+filepathtxt+'\n')
                 except:
-                    print("   [ERROR]: FFMPEG is not exist\n")
+                    print("   [ERROR]: FFMPEG is not initialized\n")
                     time.sleep(1)
-                    BadContinue()
+                    Continue()
+                    exit()
                 Continue()
             except:
                 time.sleep(1)
-                BadContinue()
+                Continue()
         def O3():
             os.system('cls')
             print('\n   Convert Type: Ogg\n   '+bitratevorbistxt+'\n\n   What is your preferred option to convert?\n\n     [1] pick single file\n     [2] pick multiple files\n     [0] Back\n')
@@ -1265,6 +1327,7 @@ def Menu():
             print('     FFMPEG not found')
             time.sleep(1)
             Menu()
+            exit()
         O3()
     if(intoption==4):
         try:
@@ -1299,8 +1362,8 @@ def Menu():
                     if(not outputaudiofile):
                         print("   [FAILED]: Tkinter Cancelled")
                         time.sleep(1)
-                        BadContinue()
-                    print('   Input files:')
+                        Continue()
+                    print('   Input files: ')
                     for lstinfo in outputaudiofile:
                         print('     '+os.path.basename(lstinfo))
                     openwindow=Tk()
@@ -1310,7 +1373,7 @@ def Menu():
                     if(not output):
                         print("   [FAILED]: Tkinter Cancelled")
                         time.sleep(1)
-                        BadContinue()
+                        Continue()
                     print('   Directory: '+os.path.basename(output))
                     print('\n   Start Converting...\n')
                     for listfiles in outputaudiofile:
@@ -1322,9 +1385,13 @@ def Menu():
                                     print('   Converting back to original audio file: '+ os.path.splitext(listfiles1)[0])
                                     call([vgmstreamPath, '-o', output+"\\"+ os.path.splitext(listfiles1)[0], listfiles],stdout=DEVNULL, stderr=STDOUT) 
                                 except Exception as e:
-                                    print('   [ERROR] VGMSTREAM was not exist\n ') 
+                                    print('   [ERROR]: VGMStream was not initialized\n ') 
                                     time.sleep(1)
-                                    BadContinue()
+                                    Continue()
+                                if not os.path.isfile(output+"\\"+ os.path.splitext(listfiles1)[0]):
+                                    print('\n     [ERROR]: VGMStream is not recognized')
+                                    Continue()
+                                    exit()
                                 outputres=output.replace('/','\\')
                                 filepathsize=os.path.getsize(listfiles)
                                 if filepathsize<1000000:
@@ -1352,7 +1419,7 @@ def Menu():
                                     filepathsizefloat=filepathsize/1024000000
                                     filepathsizefloatdec="%.2f" % round(filepathsizefloat, 2)
                                     filepathtxt=str(filepathsizefloatdec)+" GB"
-                                print('   DONE: '+ outputres + os.path.splitext(listfiles1)[0] +' \n     Size:'+bfrfilepathtxt+' --> '+filepathtxt+'\n')
+                                print('   DONE: '+ outputres + os.path.splitext(listfiles1)[0] +' \n     Size: '+bfrfilepathtxt+' --> '+filepathtxt+'\n')
                         if(os.path.isfile(output+"/"+os.path.splitext(os.path.basename(listfiles))[0])):
                             print('   File: "'+os.path.basename(listfiles)+'"')
                             overwritteninput=str(input("   Are you sure that file will be overwritten (y or n)? "))
@@ -1371,7 +1438,7 @@ def Menu():
                     if(not outputaudiofile):
                         print("   [FAILED]: Tkinter Cancelled")
                         time.sleep(1)
-                        BadContinue()
+                        Continue()
                     filenameinfo=os.path.basename(outputaudiofile)
                     print('   Input file: '+filenameinfo)
                     openwindow=Tk()
@@ -1381,13 +1448,17 @@ def Menu():
                     if(not output):
                         print("   [FAILED]: Tkinter Cancelled")
                         time.sleep(1)
-                        BadContinue()
+                        Continue()
                     print('   Save file: '+os.path.basename(output))
                     print('\n   Start Converting...\n')
                     try:
                         run((vgmstreamPath), stdout=DEVNULL, stderr=STDOUT) 
                         print('   Converting back to original audio file: '+ os.path.splitext(os.path.basename(outputaudiofile))[0])
-                        call([vgmstreamPath, '-o', output, outputaudiofile],stdout=DEVNULL, stderr=STDOUT) 
+                        call([vgmstreamPath, '-o', output, outputaudiofile],stdout=DEVNULL, stderr=STDOUT)
+                        if not os.path.isfile(output):
+                            print('\n     [ERROR]: VGMStream is not recognized\n') 
+                            Continue()
+                            exit()
                         outputres=output.replace('/','\\')
                         filepathsize=os.path.getsize(outputaudiofile)
                         if filepathsize<1000000:
@@ -1415,11 +1486,11 @@ def Menu():
                             filepathsizefloat=filepathsize/1024000000
                             filepathsizefloatdec="%.2f" % round(filepathsizefloat, 2)
                             filepathtxt=str(filepathsizefloatdec)+" GB"
-                        print('   DONE: '+ outputres +' \n     Size:'+bfrfilepathtxt+' --> '+filepathtxt+'\n')
+                        print('   DONE: '+ outputres +' \n     Size: '+bfrfilepathtxt+' --> '+filepathtxt+'\n')
                     except Exception as e:
-                        print('   [ERROR] VGMSTREAM was not exist\n ') 
+                        print('   [ERROR] VGMSTREAM was not initialized\n ') 
                         time.sleep(1)
-                        BadContinue()
+                        Continue()
                 def O4():
                     os.system('cls')
                     print('\n   Uncook Type:VGMStream\n\n   What is your preferred option to convert?\n\n     [1] pick single file\n     [2] pick multiple files\n     [0] Back\n')
@@ -1448,8 +1519,8 @@ def Menu():
                     if(not outputaudiofile):
                         print("   [FAILED]: Tkinter Cancelled")
                         time.sleep(1)
-                        BadContinue()
-                    print('   Input files:')
+                        Continue()
+                    print('   Input files: ')
                     for lstinfo in outputaudiofile:
                         print('     '+os.path.basename(lstinfo))
                     openwindow=Tk()
@@ -1459,12 +1530,12 @@ def Menu():
                     if(not output):
                         print("   [FAILED]: Tkinter Cancelled")
                         time.sleep(1)
-                        BadContinue()
+                        Continue()
                     print('   Directory: '+os.path.basename(output))
                     print('\n   Start Converting...\n')
                     for listfiles in outputaudiofile:
                         listfiles1=os.path.basename(listfiles)
-                        def startRun():
+                        def startRun(outputaudiofile):
                             if(".ckd" in listfiles1):
                                 with open(listfiles, "rb") as f:
                                     print('   Uncook back to original audio file: '+ listfiles)
@@ -1477,22 +1548,22 @@ def Menu():
                                         f.read(28)
                                         marksig=f.read(4)
                                         multiplier2=0
+                                        sig=0
                                         if marksig==b'MARK':
                                             try:
-                                                f.read(4)
-                                                multiplier=struct.unpack("i",f.read(4))[0]
-                                                f.read(8)
-                                                multiplier3=struct.unpack("i",f.read(4))[0]
-                                                multiplier2=int(multiplier+multiplier3+2)
+                                                f.read(20)
                                                 datatitle=f.read(4)
+                                                sig=1
                                             except Exception as e:
                                                 print("wrong wav file")
                                                 time.sleep(1)
-                                                BadContinue()
+                                                Continue()
                                         else:
                                             datatitle=marksig
                                         f.read(4)
                                         data=f.read(4)
+                                        if sig==1:
+                                            multiplier2=int(os.path.getsize(outputaudiofile)-(struct.unpack("I",data)[0]+96))
                                         endriff=f.read(16) 
                                         f.read(multiplier2)
                                         audiodata=f.read() 
@@ -1533,7 +1604,7 @@ def Menu():
                                                 filepathsizefloat=filepathsize/1024000000
                                                 filepathsizefloatdec="%.2f" % round(filepathsizefloat, 2)
                                                 filepathtxt=str(filepathsizefloatdec)+" GB"
-                                            print('   DONE: '+ outputres + os.path.splitext(listfiles1)[0] +' \n     Size:'+bfrfilepathtxt+' --> '+filepathtxt+'\n')
+                                            print('   DONE: '+ outputres + os.path.splitext(listfiles1)[0] +' \n     Size: '+bfrfilepathtxt+' --> '+filepathtxt+'\n')
                                         except Exception as e:
                                             print('   [ERROR] This file is used from another process\n ')
                                     else:
@@ -1543,15 +1614,15 @@ def Menu():
                                             print('   BAD FILE: "'+listfiles1+ '" Undetected file or not pcm')
                             else:
                                 print('   [ERROR]: This file '+ listfiles1+' is not .ckd')
-                    if(os.path.isfile(output+"/"+os.path.splitext(os.path.basename(listfiles))[0]+".wav")):
-                        print('   File: "'+os.path.basename(listfiles)+'"')
-                        overwritteninput=str(input("   Are you sure that file will be overwritten (y or n)? "))
-                        if overwritteninput=="y" or overwritteninput=="Y":
-                            startRun()
+                        if(os.path.isfile(output+"/"+os.path.splitext(os.path.basename(listfiles))[0]+".wav")):
+                            print('   File: "'+os.path.basename(listfiles)+'"')
+                            overwritteninput=str(input("   Are you sure that file will be overwritten (y or n)? "))
+                            if overwritteninput=="y" or overwritteninput=="Y":
+                                startRun(outputaudiofile)
+                            else:
+                                print('   The file: "'+os.path.basename(listfiles)+'" was canceled')
                         else:
-                            print('   The file: "'+os.path.basename(listfiles)+'" was canceled')
-                    else:
-                        startRun()
+                            startRun(listfiles)
                 def Opt2():
                     print("\n   Run Tkinter:\n")
                     openwindow=Tk()
@@ -1560,7 +1631,7 @@ def Menu():
                     openwindow.destroy()
                     if(not outputaudiofile):
                         print("   [FAILED]: Tkinter Cancelled")
-                        BadContinue()
+                        Continue()
                     filenameinfo=os.path.basename(outputaudiofile)
                     print('   Input file: '+filenameinfo)
                     openwindow=Tk()
@@ -1570,7 +1641,7 @@ def Menu():
                     if(not output):
                         print("   [FAILED]: Tkinter Cancelled")
                         time.sleep(1)
-                        BadContinue()
+                        Continue()
                     print('   Save file: '+os.path.basename(output))
                     print('\n   Start Converting...\n')
                     with open(outputaudiofile, "rb") as f:
@@ -1581,22 +1652,22 @@ def Menu():
                             f.read(28)
                             marksig=f.read(4)
                             multiplier2=0
+                            sig=0
                             if marksig==b'MARK':
                                 try:
-                                    f.read(4)
-                                    multiplier=struct.unpack("i",f.read(4))[0]
-                                    f.read(8)
-                                    multiplier3=struct.unpack("i",f.read(4))[0]
-                                    multiplier2=int(multiplier+multiplier3+2)
+                                    f.read(20)
                                     datatitle=f.read(4)
+                                    sig=1
                                 except Exception as e:
                                     print("wrong wav file")
                                     time.sleep(1)
-                                    BadContinue()
+                                    Continue()
                             else:
                                 datatitle=marksig
                             f.read(4)
                             data=f.read(4)
+                            if sig==1:
+                                multiplier2=int(os.path.getsize(outputaudiofile)-(struct.unpack("I",data)[0]+96))
                             endriff=f.read(16) 
                             f.read(multiplier2)
                             audiodata=f.read() 
@@ -1637,7 +1708,7 @@ def Menu():
                                     filepathsizefloat=filepathsize/1024000000
                                     filepathsizefloatdec="%.2f" % round(filepathsizefloat, 2)
                                     filepathtxt=str(filepathsizefloatdec)+" GB"
-                                print('   DONE: '+ outputres +' \n     Size:'+bfrfilepathtxt+' --> '+filepathtxt+'\n')
+                                print('   DONE: '+ outputres +' \n     Size: '+bfrfilepathtxt+' --> '+filepathtxt+'\n')
                             except Exception as e:
                                 print('   [ERROR] This file is used from another process\n ')
                         else:
@@ -1728,7 +1799,7 @@ def Menu():
                 time.sleep(1)
                 Menu()
         def O7():
-            print('\n   Help:')
+            print('\n   Help: ')
             print('''
         [1] How to cook wav to (wav.ckd or .ogg)
         [2] How to uncook wav.ckd to (.wav)
@@ -1813,7 +1884,16 @@ def Menu():
        - [Add feature] Add Settings
        - [Improved feature] Detects missing app when open
        - [Improved ffmpeg request] Change ffmpeg os.system to subprocess''')
-            if (changever>7 or changever<0):
+            if changever==8:
+                print('''     Version 1.5.1
+       - [Improvement Print] Improve Print Console in Settings
+       - [Bug Fixes] Fixed VGAudio input temp not found
+       - [Settings] Volume numbers are now divided to 100 in config and change 2 option in path environment
+       - [Custom Value Settings] Fixed bug in custom volume and gets back in pressing enter in 3 times same as change bitrate
+       - [Exit Bug] Fixed bug the from exit
+       - [Old Config] Old config.json from 1.0 are now updated
+       - [App Wrong Detector] in FFMPEG, VGMStream and VGAudio are now detected to file if your requirements is wrong''')
+            if (changever>8 or changever<0):
                 print('Wrong option')
                 time.sleep(1)
                 os.system('cls')
@@ -1822,7 +1902,7 @@ def Menu():
                 time.sleep(1)
                 Menu()
         def O8():
-            print('  Changelog:')
+            print('  Changelog: ')
             print('''     Choose the Version:
        [1] Version v1.0
        [2] Version v1.1
@@ -1831,6 +1911,7 @@ def Menu():
        [5] Version v1.4.0 - New Patch Version
        [6] Version v1.4.1
        [7] Version v1.5.0
+       [8] Version v1.5.1
        [0] Menu''')
             try:
                 num=int(input('   Select a version that updates the application --> '))
@@ -1839,7 +1920,7 @@ def Menu():
                 time.sleep(1)
                 os.system('cls')
                 O8()
-            if num==0 or num>7 or num<0:
+            if num==0 or num>8 or num<0:
                 pass
             else:
                 os.system('cls')
@@ -1857,7 +1938,7 @@ def Menu():
         def Options(nbrs):
             os.system('cls')
             if(nbrs==1):
-                def Func(nbrs,mode):
+                def Func(nbrs,mode,press01):
                     if(nbrs==1):
                         bitbyte=0
                     elif(nbrs==2):
@@ -1871,14 +1952,27 @@ def Menu():
                     elif(nbrs==6):
                         bitbyte=320000
                     elif(nbrs==7):
+                        os.system('cls')
+                        if mode=="opus":
+                            print('\n     Custom Bitrate:\n     Limit: (12000 (12kbps) to 920000 (920kbps))\n\n     '+bitrateopustxt+'\n\n      Press Enter '+str(press01)+' times to back\n')
+                        else:
+                            print('\n     Custom Bitrate:\n     Limit: (12000 (12kbps) to 920000 (920kbps))\n\n     '+bitratevorbistxt+'\n\n      Press Enter '+str(press01)+' times to back\n')
+                        strbitbyte=str(input('    Input here from bytes --> '))
+                        if not strbitbyte:
+                            press01-=1
+                            if press01==0:
+                                GoFunc(mode)
+                                exit()
+                            Func(nbrs,mode,press01)
                         try:
-                            bitbyte=int(input('    Input here from bytes -->'))
+                            bitbyte=int(strbitbyte)
                         except:
+                            time.sleep(1)
                             print('     [ERROR]: Invalid option')
-                            Func(nbrs,mode)
+                            Func(nbrs,mode,3)
                         if bitbyte<12000 or bitbyte>920000:
                             print('     [Note]: Maximum bytes')
-                            Func(nbrs,mode)
+                            Func(nbrs,mode,3)
                     elif(nbrs==0):
                         O10()
                     else:
@@ -1890,9 +1984,12 @@ def Menu():
                     elif mode=="vorbis":
                         conjson1(volume,modepcm,modeopus,channeljson,ffmpegPath,vgaudioPath,vgmstreamPath,opubitrate,bitbyte,1)
                 def GoFunc(mode):
+                    press01=3
                     os.system('cls')
                     if mode=="opus":
                         print('''    Choose the bitrate here (in cooked opus):
+
+    '''+bitrateopustxt+'''
     (Note: 192k = 192000)
     [1] Auto
     [2] 32000 (Low)
@@ -1905,6 +2002,8 @@ def Menu():
     ''')
                     if mode=="vorbis":
                         print('''\n    Choose the bitrate here (in vorbis):
+
+    '''+bitratevorbistxt+'''
     (Note: 192k = 192000)
     [1] Auto
     [2] 32000 (Low)
@@ -1922,15 +2021,19 @@ def Menu():
                         time.sleep(1)
                         os.system('cls')
                         GoFunc(mode)
-                    Func(nbrs,mode)
+                    Func(nbrs,mode,press01)
                 def O10():
                     os.system('cls')
                     print('''    \n     Choose Bitrate Type:
-            [1] Cooked Opus
-            [2] Ogg
-            [0] Back''')
+        
+        '''+bitrateopustxt+''' | '''+bitratevorbistxt+'''
+
+        [1] Cooked Opus
+        [2] Ogg
+        [0] Back
+        ''')
                     try:
-                        nbrs = int(input('      Choose the bitrate type here --> '))
+                        nbrs = int(input('       Choose the bitrate type here --> '))
                     except:
                         print(' [ERROR]: Invalid option')
                         O10()
@@ -1968,6 +2071,7 @@ def Menu():
                             O10()
                         conjson1(volume,modepcm,modeopus,channeljson,ffmpegPath,vgaudioPath,vgmstreamPath,opubitrate,vorbitrate,1)
                     elif num==0:
+                        os.system('cls')
                         O9()
                     else:
                         print('     [ERROR]: Invalid number')
@@ -1976,8 +2080,8 @@ def Menu():
                     os.system('cls')
                     print('''\n     Choose Path Environment Type:
             [1] FFMPEG
-            [2] VGMStream
-            [3] VGAudio
+            [2] VGAudio
+            [3] VGMStream
             [0] Back''')
                     try:
                         nbrs=int(input('    Choose the path environment here --> '))
@@ -1992,6 +2096,7 @@ def Menu():
                         print('     Applying...')
                         conjson1(volume,modepcm,modeopus,str(nbrs),ffmpegPath,vgaudioPath,vgmstreamPath,opubitrate,vorbitrate,1)
                     elif(nbrs==0):
+                        os.system('cls')
                         O9()
                     else:
                         print('     [ERROR]: Invalid option')
@@ -2001,9 +2106,11 @@ def Menu():
                 def O10():
                     os.system('cls')
                     print('''\n    Choose Channels:
-            [1] Mono
-            [2] Stereo
-            [0] Back''')
+                          
+            '''+txtchanneljson+'''
+        [1] Mono
+        [2] Stereo
+        [0] Back''')
                     try:
                         nbrs=int(input('    Choose option here -> '))
                     except:
@@ -2015,41 +2122,52 @@ def Menu():
                 O10()
             elif(nbrs==4):
                 os.system('cls')
-                def Func(nbrs):
+                volumestr=int(volume)*100
+                def Func(nbrs,press01):
                     if(nbrs==1):
                         strvol=100
                         print('     Applying...')
-                        conjson1(str(strvol),modepcm,modeopus,channeljson,ffmpegPath,vgaudioPath,vgmstreamPath,opubitrate,vorbitrate,1)
+                        conjson1(str(strvol/100),modepcm,modeopus,channeljson,ffmpegPath,vgaudioPath,vgmstreamPath,opubitrate,vorbitrate,1)
                     elif(nbrs==2):
                         strvol=75
                         print('     Applying...')
-                        conjson1(str(strvol),modepcm,modeopus,channeljson,ffmpegPath,vgaudioPath,vgmstreamPath,opubitrate,vorbitrate,1)
+                        conjson1(str(strvol/100),modepcm,modeopus,channeljson,ffmpegPath,vgaudioPath,vgmstreamPath,opubitrate,vorbitrate,1)
                     elif(nbrs==3):
                         strvol=50
                         print('     Applying...')
-                        conjson1(str(strvol),modepcm,modeopus,channeljson,ffmpegPath,vgaudioPath,vgmstreamPath,opubitrate,vorbitrate,1)
+                        conjson1(str(strvol/100),modepcm,modeopus,channeljson,ffmpegPath,vgaudioPath,vgmstreamPath,opubitrate,vorbitrate,1)
                     elif(nbrs==4):
                         strvol=25
                         print('     Applying...')
-                        conjson1(str(strvol),modepcm,modeopus,channeljson,ffmpegPath,vgaudioPath,vgmstreamPath,opubitrate,vorbitrate,1)
+                        conjson1(str(strvol/100),modepcm,modeopus,channeljson,ffmpegPath,vgaudioPath,vgmstreamPath,opubitrate,vorbitrate,1)
                     elif(nbrs==5):
                         strvol=0
                         print('     Applying...')
-                        conjson1(str(strvol),modepcm,modeopus,channeljson,ffmpegPath,vgaudioPath,vgmstreamPath,opubitrate,vorbitrate,1)
+                        conjson1(str(strvol/100),modepcm,modeopus,channeljson,ffmpegPath,vgaudioPath,vgmstreamPath,opubitrate,vorbitrate,1)
                     elif(nbrs==6):
                         os.system('cls')
+                        print('\n     Custom Volume:\n     Limit: (0 to 500%)\n\n     Main Volume: '+str(volumestr)+'%\n\n      Press Enter '+str(press01)+' times to back\n')
+                        strvol=str(input('     Input volume here(Limit: 500%) ----> '))
+                        if not strvol:
+                            press01-=1
+                            if press01==0:
+                                O10()
+                                exit()
+                            Func(nbrs,press01)
                         try:
-                            strvol=int(input('     Input volume here(Limit: 500%) --> '))
+                            strvol1=int(strvol)
                         except:
+                            time.sleep(1)
                             print('     [ERROR]: Invalid option')
-                            Func(nbrs)
-                        if strvol>500 or strvol<0:
+                            Func(nbrs,3)
+                        if strvol1>500 or strvol1<0:
                             print('     Limit numbers!!!')
                             time.sleep(0.5)
-                            Func(nbrs)
+                            Func(nbrs,3)
                         else:
-                            conjson1(str(strvol),modepcm,modeopus,channeljson,ffmpegPath,vgaudioPath,vgmstreamPath,opubitrate,vorbitrate,1)
+                            conjson1(str(strvol1/100),modepcm,modeopus,channeljson,ffmpegPath,vgaudioPath,vgmstreamPath,opubitrate,vorbitrate,1)
                     elif(nbrs==0):
+                        os.system('cls')
                         O9()
                     else:
                         print('     [ERROR]: Invalid option')
@@ -2057,23 +2175,24 @@ def Menu():
                         os.system('cls')
                         O10()
                 def O10():
+                    press01=3
                     os.system('cls')
-                    print('''\n    Select Volume Input:
-            [1] 100%
-            [2] 75%
-            [3] 50%
-            [4] 25%
-            [5] 0% (muted)
-            [6] Custom
-            [0] Back''')
+                    print('''\n        Select Volume Input:
+            Main Volume: '''+str(volumestr)+'''%
+        [1] 100%
+        [2] 75%
+        [3] 50%
+        [4] 25%
+        [5] 0% (muted)
+        [6] Custom
+        [0] Back''')
                     try:
                         nbrs=int(input('        Choose the option --> '))
                     except:
                         print('     [ERROR]: Invalid option')
                         time.sleep(1)
-                        os.system('cls')
                         O10()
-                    Func(nbrs)
+                    Func(nbrs,press01)
                 O10()
             elif(nbrs==5):
                 os.system('cls')
@@ -2094,6 +2213,8 @@ def Menu():
                         def GoFunc():
                             os.system('cls')
                             print('''\n    Choose Mode from Cooked Opus:
+        Main Mode: '''+nameopusMode+'''
+
         [1] New Mode (JD2020-22)
         [2] Old Mode (JD2017-19)
         [0] Back''')
@@ -2114,6 +2235,7 @@ def Menu():
                             elif(nbrs==3):
                                 conjson1(volume,"titlepage",modeopus,channeljson,ffmpegPath,vgaudioPath,vgmstreamPath,opubitrate,vorbitrate,1)
                             elif(nbrs==0):
+                                os.system('cls')
                                 O10()
                             else:
                                 print('     [ERROR]: Invalid option')
@@ -2121,6 +2243,8 @@ def Menu():
                         def GoFunc():
                             os.system('cls')
                             print('''\n    Choose Mode from Cooked PCM:
+        Main Mode: '''+namepcmMode+'''
+                                  
         [1] New Mode (JD2020-22)
         [2] Old Mode (JD2017-19)
         [3] JD Titlepage w/signature (Beta)
@@ -2133,6 +2257,7 @@ def Menu():
                             Func01(nbrs)
                         GoFunc()
                     elif nbrs==0:
+                        os.system('cls')
                         O9()
                     else:
                         print('     [ERROR]: Invalid option')
@@ -2140,10 +2265,11 @@ def Menu():
                         os.system('cls')
                         O10()
                 def O10():
-                    print('''    Choose Mode Audio Type:
-            [1] Cooked Opus
-            [2] Cooked PCM
-            [0] Back''')
+                    print('''
+            Choose Mode Audio Type:
+        [1] Cooked Opus
+        [2] Cooked PCM
+        [0] Back''')
                     try:
                         nbrs=int(input('    Input the mode type here --> '))
                     except:
@@ -2160,14 +2286,14 @@ def Menu():
                 O9()
         def O9():
             print('''
-        Settings: '''+'''
-        Settings(JSON) Version: '''+str(ver)+'''
-            [1] Change Bitrate
-            [2] Change Path Environment
-            [3] Channels
-            [4] Volume
-            [5] Mode
-            [0] Back to Menu''')
+    Settings: '''+'''
+    Settings(JSON) Version: '''+str(ver)+'''
+        [1] Change Bitrate
+        [2] Change Path Environment
+        [3] Channels
+        [4] Volume
+        [5] Mode
+        [0] Back to Menu''')
             try:
                 modeopt=int(input('   Choose the option --> '))
             except:
@@ -2182,34 +2308,17 @@ def Menu():
         Menu()
 def Continue():
     try:
-        os.remove('temp/temp.wav')
+        os.remove('temp\\temp.wav')
     except:
         pass
     try:
-        os.remove('temp/temp.lopus')
-    except:
-        pass
-    try:
-        os.rmdir('temp')
-    except:
-        pass
-    input("   Press Enter to go Menu...")
-    Menu()
-def BadContinue():
-    try:
-        os.remove('temp/temp.wav')
-    except:
-        pass
-    try:
-        os.remove('temp/temp.lopus')
+        os.remove('temp\\temp.lopus')
     except:
         pass
     try:
         os.rmdir('temp')
     except:
         pass
-    print('\n')
     input("   Press Enter to go Menu...")
     Menu()
 Menu()
-exit()
