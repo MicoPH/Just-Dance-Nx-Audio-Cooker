@@ -1,4 +1,6 @@
 # **Just Dance Audio Cooker**
+
+## Credits
 - [MicoPH](https://github.com/MicoPH/)
 - [MZommer](https://github.com/MZommer) - UbiArtPY
 - [VGMStream](https://github.com/vgmstream) - VGMStream
@@ -7,8 +9,8 @@
 
 ---
 - [FFMPEG](https://ffmpeg.org) -  ffmpeg.org - [Link](https://ffmpeg.org)
-- [VGMStream](https://github.com/vgmstream/vgmstream) - Backup Audio (include in `audiotools.zip`)
-- [VGAudio](https://github.com/Thealexbarney/VGAudio) - for Nintendo Switch _Opus_ (include in `audiotools.zip`) 
+- [VGMStream](https://github.com/vgmstream/vgmstream) - Backup Audio
+- [VGAudio](https://github.com/Thealexbarney/VGAudio) - for Nintendo Switch _Opus_ 
 
 ---
 
@@ -39,8 +41,8 @@ _A:the codename on Nintendo Switch_
 ## Supported Formats
 - `.ogg` - Ogg Vorbis
 - `.opus` - .opus (ffmpeg)
-- `.wav` - pcm
-- `.mp3` - MPEG
+- `.wav` - Wave (PCM)
+- `.mp3` - MPEG Layer 3
 
 ---
 
@@ -76,5 +78,5 @@ In Version 1.5.0 config are available now in Settings _Command 7_
 |Ogg|uses for online music|
 
 ----
-## Infos
-`audiocooker` works in _Just Dance 2019_ to _Just Dance 2022_ (Nintendo Switch). I haven't tested if it will work in _Just Dance 2017_ and _Just Dance 2018_
+## Infos & Facts
+`audiocooker` works in _Just Dance 2019_ to _Just Dance 2022_ (Nintendo Switch). I haven't tested if it will work in _Just Dance 2017_ and _Just Dance 2018_. This tool is a type of `UbiArt` and format called `Ubisoft RAKI`
