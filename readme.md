@@ -1,4 +1,4 @@
-# **Just Dance Audio Cooker**
+# **Just Dance Nx Audio Cooker**
 
 ## Credits
 - [MicoPH](https://github.com/MicoPH/)
@@ -10,7 +10,7 @@
 ---
 - [FFMPEG](https://ffmpeg.org) -  ffmpeg.org - [Link](https://ffmpeg.org)
 - [VGMStream](https://github.com/vgmstream/vgmstream) - Backup Audio
-- [VGAudio](https://github.com/Thealexbarney/VGAudio) - for Nintendo Switch _Opus_ 
+- [VGAudio](https://github.com/Thealexbarney/VGAudio) - for Nintendo Switch _Opus_ (Note: This Released Version is outdated)
 
 ---
 
