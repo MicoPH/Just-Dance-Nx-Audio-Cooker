@@ -10,7 +10,7 @@
 ---
 - [FFMPEG](https://ffmpeg.org) -  ffmpeg.org - [Link](https://ffmpeg.org)
 - [VGMStream](https://github.com/vgmstream/vgmstream)
-- [VGAudio](https://github.com/Thealexbarney/VGAudio) - for Nintendo Switch _Opus_ (Note: This Released Version of VGAudio is outdated)
+- [VGAudio](https://github.com/Thealexbarney/VGAudio)
 
 ---
 
@@ -65,7 +65,7 @@ _A:the codename on Nintendo Switch_
 |Ubisoft Raki Format| Available Header (config)|
 |:-----|:------|
 |PCM | from `pcmModeData` key are based in list arrays|
-|Libopus |  from `pcmModeData` key are based in list arrays|
+|Libopus |  from `opusModeData` key are based in list arrays|
 
 ### Note
 In Version 1.5.0 config are available now in Settings _Command 7_
