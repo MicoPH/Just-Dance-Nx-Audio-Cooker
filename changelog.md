@@ -13,16 +13,6 @@
 - <span style="color:#4ae75d">[Feature]</span> Add single file on _Command 4_
 - <span style="color:#4ae75d">[Feature]</span> Adding Brackets in per window
 - <span style="color:#4ae75d">[Feature]</span> Add More audio codes on config
-
-          Ubisoft RAKI PCM Type:
-            Normal - New Header/used for ambs/used for ui
-            Old Version - Old Types of Header/used ui in jd2017-2019
-            TitlePage - Main titlepage in Just Dance
-
-          Ubisoft RAKI Nintendo Opus Types:
-            Normal - New Header/used for ambs/used for ui
-            Old Version - Old Types of Header/used ui in jd2017-2019>
-
 - <span style="color:#f1f11f">[Bug Fixed]</span> Fix issues from input directory on Commmand 2
 - <span style="color:#f1f11f">[Bug Fixed]</span> Fix issues from Command 3
 - <span style="color:#f1f11f">[Bug Fixed]</span> Fix crash on changelog when exit
@@ -71,4 +61,21 @@
 - [Custom Value Settings] Fixed bug in custom volume and gets back in pressing enter in 3 times same as change bitrate
 - [Exit Bug] Fixed bug the from exit
 - [Old Config] Old config.json from 1.0 are now updated
-- [App Wrong Detector] in FFMPEG, VGMStream and VGAudio are now detected to file if your requirements is wrong
+
+### Version 2.0.0
+- [Added Feature] Added filesize difference the previous
+- [Added Feature] Added audiotrimmer amb.
+    This feature is perfect convert your ambs from JDNEXT to JDU
+- [Added Feature] Added Video file support on tkinter
+- [Skip Exit] When changed config in Settings are fixed
+- [JSON] The pcmMode and opusMode keys are removed and change into number of arrays
+        (Default header --> 0)
+        (Header 2 --> 1)
+- [Fully deleted outputback] from the previous version the folder outputback is always shown is now deleted from this script
+- [Backup Config] The filename of the config backup file has fixed datetime format which is includes day format
+- [Change header info] Changed title name
+        Normal - Default
+        Old Header - Header 2
+- [Bug Fixed] From some Activity input invalid number exception is hidden
+- [Updated JSON Keys] Updated other JSON Keys
+- [Added Feature] Added cmdClear on config and settings. "True" by default

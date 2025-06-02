@@ -2,14 +2,14 @@
 
 ## Credits
 - [MicoPH](https://github.com/MicoPH/)
-- [MZommer](https://github.com/MZommer) - UbiArtPY (few codes have in this script)
+- [MZommer](https://github.com/MZommer) - UbiArtPY (few codes have in this script but i don't copy a lot)
 
 
 ## Requirements
 
 ---
 - [FFMPEG](https://ffmpeg.org) -  ffmpeg.org - [Link](https://ffmpeg.org)
-- [VGMStream](https://github.com/vgmstream/vgmstream) - Backup Audio
+- [VGMStream](https://github.com/vgmstream/vgmstream)
 - [VGAudio](https://github.com/Thealexbarney/VGAudio) - for Nintendo Switch _Opus_ (Note: This Released Version of VGAudio is outdated)
 
 ---
@@ -43,6 +43,7 @@ _A:the codename on Nintendo Switch_
 - `.opus` - .opus (ffmpeg)
 - `.wav` - Wave (PCM)
 - `.mp3` - MPEG Layer 3
+- Video with audio are supported
 
 ---
 
@@ -63,20 +64,21 @@ _A:the codename on Nintendo Switch_
 ### Available Modes
 |Ubisoft Raki Format| Available Header (config)|
 |:-----|:------|
-|pcm (.wav) | `default` `header2` `titlepage`|
-|Nintendo _opus_ | `default` `header2`|
+|PCM | from `pcmModeData` key are based in list arrays|
+|Libopus |  from `pcmModeData` key are based in list arrays|
 
 ### Note
 In Version 1.5.0 config are available now in Settings _Command 7_
+In Version 2.0.0 config are include the `CmdClear` keys
 
 ---
 ### How Just Dance Audio Cooker Works in Games:
 |Cook Format| Descrption|
 |:------|:-----|
-|pcm (.wav)|UI only but not for songs|
-|Nintendo _opus_|Most recommended|
-|Ogg|Most of mods have use it for easier methods|
+|PCM |UI only|
+|Libopus |More efficient than Ogg Vorbis|
+|Ogg Vorbis|Most of mods have use it for easier methods|
 
 ----
 ## Infos & Facts
-`audiocooker` works in _Just Dance 2019_ to _Just Dance 2022_ (Nintendo Switch). I haven't tested if it will work in _Just Dance 2017_ and _Just Dance 2018_. This tool is a type of `UbiArt` and format called `Ubisoft RAKI` and Thanks to [MZommer](https://github.com/MZommer)
+`audiocooker` works in _Just Dance 2019_ to _Just Dance 2022_ (Nintendo Switch). I haven't tested if it will work in _Just Dance 2017_ and _Just Dance 2018_. This tool is a type of `UbiArt` and format called `Ubisoft RAKI`

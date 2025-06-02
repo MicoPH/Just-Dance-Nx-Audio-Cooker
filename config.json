@@ -1,122 +1,112 @@
 {
-    "addVolume": 1,    
-    "version": 1.5,
-    "pcmMode": "normal",
-    "opusMode": "normal",
-    "channel": 2,
-    "ffmpegPath": "ffmpeg",
-    "nintendoVGAudioPath": "VGAudioCli",
-    "vgmstreamPath": "vgmstream",
-    "opusbitrate": 256000,
-    "vorbisbitrate": 256000,
-    "pcmModeData":[
-        {
-            "id": 1,
-            "pcmModeType": "normal",
-            "pcmtitle": "Normal (JD2020-2022 Version)",
-            "pcmHead": 72,
-            "pcmHead1": 72,
-            "pcmHead2": 2,
-            "pcmHead3": 0,
-            "pcmfmt": 56,
-            "pcmfmt2": 16,
-            "mark": false,
-            "strg": false
-        },
-        {
-            "id": 2,
-            "pcmModeType": "oldVersion",
-            "pcmtitle": "Old Version (JD2017-2019 Version)",
-            "pcmHead": 74,
-            "pcmHead1": 80,
-            "pcmHead2": 2,
-            "pcmHead3": 3,
-            "pcmfmt": 56,
-            "pcmfmt2": 16,
-            "mark": false,
+	"version": 2.0,
+	"cmdclear": true,
+	"addVolume": 1,
+	"pcmMode": 0,
+	"opusMode": 0,
+	"channel": 2,
+	"ffmpegPath": "ffmpeg",
+	"VGAudioPath": "VGAudioCli",
+	"vgmstreamPath": "vgmstream",
+	"opusbitrate": 256000,
+	"vorbisbitrate": 320000,
+	"pcmModeData": [
+		{
+			"pcmTitle": "Default",
+			"pcmHead": 72,
+			"pcmHead1": 72,
+			"pcmHead2": 2,
+			"pcmHead3": 0,
+			"pcmfmt": 56,
+			"pcmfmt2": 16,
+			"mark": false,
 			"strg": false
-        },
-        {
-            "id": 3,
-            "pcmModeType": "titlepage",
-            "pcmtitle": "JD TitlePage",
-            "pcmHead": 2288,
-            "pcmHead1": 2288,
-            "pcmHead2": 4,
-            "pcmHead3": 3,
-            "pcmfmt": 80,
-            "pcmfmt2": 18,
-            "mark": true,
-            "strg": true,
-            "marklength": 2,
-            "strglength": 2,
-            "markdata":[
-                {
-                    "mark1":98,
-                    "mark2":2182,
-                    "strg1":2280,
-                    "strg2":8,
-                    "addinfohead1": 23789568,
-                    "addinfohead2": 0,
-                    "addinfohead3": 1,
-                    "addinfohead4": 3145734,
-                    "multiplieronaddinfo1": false,
-                    "multiplieronaddinfo2": true,
-                    "multiplieronaddinfo3": false,
-                    "multiplieronaddinfo4": false,
-                    "multiplier":[
-                        {
-                            "addinfo1": "mark1",
-                            "addinfo2": "mark2",
-                            "addinfo3": "strg1",
-                            "addinfo4": "strg2"
-                        }
-                    ]
-                }
-            ]
-        }
-    ],
-    "opusModeData":[
-        {
-            "id": 1,
-            "opusModeType": "normal",
-            "opusTitle": "Normal (JD2020-2022 Version)",
-            "opusHead": 88,
-            "opusHead2": 88,
-            "opusHead3": 3,
-            "opusHead4": 3,
-            "opusfmt": 68,
-            "opusfmt2": 16,
-            "adinlength": 2,
-            "adindata":[
-                {
-                    "adin1":84,
-                    "adin2":4
-                }
-            ],
-            "datatitlehead": 88,
-            "16bitonInt32": false
-        },
-        {
-            "id": 2,
-            "opusModeType": "oldVersion",
-            "opusTitle": "Old Version (JD2017-2019 Version)",
-            "opusHead": 90,
-            "opusHead2": 96,
-            "opusHead3": 3,
-            "opusHead4": 3,
-            "opusfmt": 68,
-            "opusfmt2": 18,
-            "adinlength": 2,
-            "adindata":[
-                {
-                    "adin1":86,
-                    "adin2":4
-                }
-            ],
-            "datatitlehead": 96,
-            "16bitonInt32": true
-        }
-    ]
-
+		},
+		{
+			"pcmTitle": "Header 2",
+			"pcmHead": 74,
+			"pcmHead1": 80,
+			"pcmHead2": 2,
+			"pcmHead3": 3,
+			"pcmfmt": 56,
+			"pcmfmt2": 16,
+			"mark": false,
+			"strg": false
+		},
+		{
+			"pcmTitle": "JD TitlePage",
+			"pcmHead": 2288,
+			"pcmHead1": 2288,
+			"pcmHead2": 4,
+			"pcmHead3": 3,
+			"pcmfmt": 80,
+			"pcmfmt2": 18,
+			"mark": true,
+			"strg": true,
+			"marklength": 2,
+			"strglength": 2,
+			"markdata": [
+				{
+					"mark1": 98,
+					"mark2": 2182,
+					"strg1": 2280,
+					"strg2": 8,
+					"addinfohead1": 23789568,
+					"addinfohead2": 0,
+					"addinfohead3": 1,
+					"addinfohead4": 3145734,
+					"multiplieronaddinfo1": false,
+					"multiplieronaddinfo2": true,
+					"multiplieronaddinfo3": false,
+					"multiplieronaddinfo4": false,
+					"multiplier": [
+						{
+							"addinfo1": "mark1",
+							"addinfo2": "mark2",
+							"addinfo3": "strg1",
+							"addinfo4": "strg2"
+						}
+					]
+				}
+			]
+		}
+	],
+	"opusModeData": [
+		{
+			"opusTitle": "Default",
+			"opusHead": 88,
+			"opusHead2": 88,
+			"opusHead3": 3,
+			"opusHead4": 3,
+			"opusfmt": 68,
+			"opusfmt2": 16,
+			"adinlength": 2,
+			"adindata": [
+				{
+					"adin1": 84,
+					"adin2": 4
+				}
+			],
+			"datatitlehead": 88,
+			"16bitonInt32": false
+		},
+		{
+			"opusTitle": "Header 2",
+			"opusHead": 90,
+			"opusHead2": 96,
+			"opusHead3": 3,
+			"opusHead4": 3,
+			"opusfmt": 68,
+			"opusfmt2": 18,
+			"adinlength": 2,
+			"adindata": [
+				{
+					"adin1": 86,
+					"adin2": 4
+				}
+			],
+			"datatitlehead": 96,
+			"16bitonInt32": true
+		}
+	]
 }
