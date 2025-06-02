@@ -22,11 +22,11 @@ _A: Yes_
 
 #### Q: Is that supported from any platform?
 
-_A: maybe, for cooked pcm but opus didn't supported for nx only_
+_A: maybe, for cooked pcm (if change the platform in editor) but opus didn't supported for nx only_
 
-#### Q:is the format of nintendo opus the same as default opus?
+#### Q:is the format of libopus opus the same as default opus?
 
-_A:No, because the nintendo opus has a different codes_
+_A:No, because the libopus opus has a different codes_
 
 #### Q:What Nx means?
 
