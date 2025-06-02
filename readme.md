@@ -8,7 +8,7 @@
 ## Requirements
 
 ---
-- [FFMPEG](https://ffmpeg.org) - 
+- [FFMPEG](https://ffmpeg.org)
 - [VGMStream](https://github.com/vgmstream/vgmstream)
 - [VGAudio](https://github.com/Thealexbarney/VGAudio)
 
